@@ -27,15 +27,14 @@ export default async function Page() {
       >
         <h1>Hello, friends!</h1>
         <p>
-          My name is Jake Brown and I'm a software engineer from Adelaide,
-          Australia. I do modern full-stack web development with an eye for
-          scalable, well architected solutions.
+          I'm a software engineer living on the Fleurieu Peninsula in South Australia.
         </p>
         <p>
-          With extensive experience designing solutions for large multi-tenant
-          application architectures on AWS, I'm also interested in exploring the
-          new cloud-native internet built on Cloudflare.
+          I have a background in numerical computing, and extensive experience designing solutions for large multi-tenant
+          applications on AWS and GCP. I'm currently interested in exploring the possibilities of a
+          new type of edge-native internet built on Cloudflare.
         </p>
+
       </div>
       <img
         class={css`

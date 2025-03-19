@@ -39,7 +39,7 @@ function NavLink({
           : css`
               &:hover {
                 background-color: var(--lightblack);
-              color: white;
+                color: white;
               }
             `
       )}
@@ -67,11 +67,10 @@ export default function Nav() {
         Now
       </NavLink>
       <NavLink href="/past" currentPath={currentPath}>
-        Past Projects
+        Past
       </NavLink>
       <span
-
-      class={css`
+        class={css`
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
           padding-left: 1rem;
@@ -82,10 +81,31 @@ export default function Nav() {
           font-weight: 900;
           line-height: 1.75rem;
           color: var(--wheat);
+          @media (max-width: 768px) {
+            display: none;
+          }
         `}
       >
-      Jake Brown
+        Jake Brown
       </span>
+
+      <a
+        style="margin-left: auto;"
+        href="https://github.com/jakebrown"
+        target="_blank"
+      >
+        <img
+          style="
+          height: 1.5rem;          
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          "
+          src="/static/img/github-mark-white.svg"
+          alt="GitHub Logo"
+          width="40"
+          height="40"
+        />
+      </a>
     </nav>
   );
 }

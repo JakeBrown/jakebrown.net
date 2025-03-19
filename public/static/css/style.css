@@ -41,7 +41,7 @@ body {
 
 @media (min-width: 1200px) {
   main {
-    width: 50%;
+    width: 1000px;
     margin: 2rem;
     margin-inline: auto;
     flex: 1 0 auto;
