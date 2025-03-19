@@ -1,0 +1,20 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 300 160"
+    width="300"
+    height="160"
+>
+    <!-- Hand-drawn readable Kickoff Text -->
+    <text x="30" y="80" font-family="Brush Script MT, cursive" font-size="60" fill="#0288D1" font-weight="bold" stroke="#01579B" stroke-width="2" stroke-linejoin="round">
+        Kickoff
+    </text>
+    
+    <!-- Hand-drawn Wave Element properly spaced -->
+    <path d="M20 120 Q50 90, 80 120 T140 120 Q170 100, 200 120 T260 120" 
+        fill="none" stroke="#0277BD" stroke-width="5" stroke-linecap="round"/>
+    <path d="M25 130 Q55 100, 85 130 T145 130 Q175 110, 205 130 T265 130" 
+        fill="none" stroke="#03A9F4" stroke-width="3" stroke-linecap="round"/>
+    <path d="M30 140 Q60 110, 90 140 T150 140 Q180 120, 210 140 T270 140" 
+        fill="none" stroke="#81D4FA" stroke-width="2" stroke-linecap="round"/>
+</svg>

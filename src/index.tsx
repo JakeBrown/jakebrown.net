@@ -17,7 +17,6 @@ app.get("/", async (c) => {
   return c.render(<HomePage />);
 });
 
-
 app.get("/past", async (c) => {
   return c.render(<Past />);
 });
