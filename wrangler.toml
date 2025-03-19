@@ -1,0 +1,17 @@
+name = "jakebrown.net"
+compatibility_date = "2025-01-03"
+compatibility_flags = [ "nodejs_compat" ]
+main = "src/index.tsx"
+find_additional_modules = true
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+
+[[rules]]
+type = "Text"
+globs = ["**/*.md"]
+fallthrough = true
+
+[observability]
+enabled = true
