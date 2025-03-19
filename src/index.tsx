@@ -26,5 +26,4 @@ app.get("/past", async (c) => {
   return c.render(<PastPage />);
 });
 
-
 export default app;

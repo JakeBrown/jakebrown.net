@@ -27,14 +27,15 @@ export default async function Page() {
       >
         <h1>Hello, friends!</h1>
         <p>
-          I'm a software engineer living on the Fleurieu Peninsula in South Australia.
+          I'm a software engineer living on the Fleurieu Peninsula in South
+          Australia.
         </p>
         <p>
-          I have a background in numerical computing, and extensive experience designing solutions for large multi-tenant
-          applications on AWS and GCP. I'm currently interested in exploring the possibilities of a
-          new type of edge-native internet built on Cloudflare.
+          I have a background in numerical computing, and extensive experience
+          designing solutions for large multi-tenant applications on AWS and
+          GCP. I'm currently interested in exploring the possibilities of a new
+          type of edge-native internet built on Cloudflare.
         </p>
-
       </div>
       <img
         class={css`

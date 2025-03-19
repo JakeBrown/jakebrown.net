@@ -2,7 +2,6 @@ name = "jakebrown"
 compatibility_date = "2025-01-03"
 compatibility_flags = [ "nodejs_compat" ]
 main = "src/index.tsx"
-find_additional_modules = true
 
 routes = [
   { pattern = "www.jakebrown.net", custom_domain = true }
