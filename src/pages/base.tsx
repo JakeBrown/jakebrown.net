@@ -24,7 +24,6 @@ export const base = jsxRenderer(
           <main>
             <Suspense fallback={<Loading />}>{children}</Suspense>
           </main>
-          <Footer />
         </body>
       </html>
     );

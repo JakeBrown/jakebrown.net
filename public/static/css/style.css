@@ -3,6 +3,7 @@
   --white: #f5f5f5; /* Soft white for better contrast */
   --burnt-orange: rgb(179, 74, 34); /* Rich, warm orange */
   --black: #121212; /* Deep black for dark themes */
+  --lightblack: #333; /* Lighter black for text */
   --grey: #6c757d; /* Muted grey for text */
   --light-grey: #adb5bd; /* Soft grey for UI elements */
   --lighter-grey: #dee2e6; /* Near-white for backgrounds */
@@ -25,6 +26,7 @@ body {
   margin: 0px !important;
   min-height: 100vh;
   display: flex;
+  background-color: var(--wheat);
   flex-direction: column;
 }
 

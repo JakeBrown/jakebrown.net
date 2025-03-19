@@ -20,6 +20,7 @@ function NavLink({
           padding-bottom: 0.5rem;
           padding-left: 1rem;
           padding-right: 1rem;
+          margin-right: 1rem;
           border-radius: 0.375rem;
           font-size: 1.125rem;
           line-height: 1.75rem;
@@ -28,16 +29,17 @@ function NavLink({
           transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
           transition-duration: 300ms;
           text-decoration: none;
-          color: black;
+          color: white;
         `,
         currentPath === href
           ? css`
-              background-color: var(--deep-sky);
-              color: white;
+              background-color: var(--black);
+              color: var(--wheat);
             `
           : css`
               &:hover {
-                background-color: var(--sky);
+                background-color: var(--lightblack);
+              color: white;
               }
             `
       )}
@@ -55,7 +57,7 @@ export default function Nav() {
       class={css`
         display: flex;
         padding: 1rem;
-        background-color: var(--wheat);
+        background-color: var(--night-sky);
       `}
     >
       <NavLink href="/" currentPath={currentPath}>
@@ -64,6 +66,23 @@ export default function Nav() {
       <NavLink href="/past" currentPath={currentPath}>
         Past Projects
       </NavLink>
+      <span
+
+      class={css`
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          padding-left: 1rem;
+          border-left: 1px solid var(--wheat);
+          padding-right: 1rem;
+          margin-right: 1rem;
+          font-size: 1.25rem;
+          font-weight: 900;
+          line-height: 1.75rem;
+          color: var(--wheat);
+        `}
+      >
+      Jake Brown
+      </span>
     </nav>
   );
 }

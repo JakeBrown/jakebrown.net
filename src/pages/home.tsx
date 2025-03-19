@@ -26,7 +26,6 @@ export default async function Page() {
         multi-tenant application architectures on AWS, I'm also interested in exploring the new
         cloud-native internet built on Cloudflare.
       </p>
-      <p>Thanks for dropping by!</p>
     </div>
   );
 }
