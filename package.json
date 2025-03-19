@@ -11,7 +11,9 @@
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "hono": "^4.6.15"
+    "hono": "^4.6.15",
+    "micromark": "^4.0.2",
+    "micromark-extension-frontmatter": "^2.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241218.0",

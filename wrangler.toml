@@ -12,10 +12,5 @@ routes = [
 directory = "public"
 binding = "ASSETS"
 
-[[rules]]
-type = "Text"
-globs = ["**/*.md"]
-fallthrough = true
-
 [observability]
 enabled = true

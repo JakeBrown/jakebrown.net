@@ -61,12 +61,8 @@ export default function Nav() {
       <NavLink href="/" currentPath={currentPath}>
         Home
       </NavLink>
-
-      <NavLink href="/now" currentPath={currentPath}>
-        Now
-      </NavLink>
-      <NavLink href="/blog" currentPath={currentPath}>
-        Blog
+      <NavLink href="/past" currentPath={currentPath}>
+        Past Projects
       </NavLink>
     </nav>
   );
