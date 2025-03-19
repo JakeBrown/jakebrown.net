@@ -3,7 +3,8 @@ import { base } from "./pages/base";
 import { ComponentClass } from "hono/jsx";
 
 import HomePage from "./pages/home";
-import Past from "./pages/past";
+import PastPage from "./pages/past";
+import NowPage from "./pages/now";
 
 type Variables = {
   name: ComponentClass;
@@ -17,8 +18,12 @@ app.get("/", async (c) => {
   return c.render(<HomePage />);
 });
 
+app.get("/now", async (c) => {
+  return c.render(<NowPage />);
+});
+
 app.get("/past", async (c) => {
-  return c.render(<Past />);
+  return c.render(<PastPage />);
 });
 
 

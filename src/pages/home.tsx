@@ -5,27 +5,50 @@ export default async function Page() {
     <div
       class={css`
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
+        align-items: center;
+        margin: 0px;
+        @media (max-width: 768px) {
+          margin: 50px;
+          flex-direction: column;
+        }
       `}
     >
-      <img class={css`
-      width: 250px;
-      height: 250px;
-      align-self: center;
-      box-shadow: 1px 1px 5px grey;
-        `} src="/static/img/headshot.jpg" alt="Jake Brown" />
-      <h1>Hello, friends!</h1>
-      <p>
-        My name is Jake Brown and I'm a software engineer from Adelaide,
-        Australia. I do modern full-stack web development with an eye for
-        scalable, well architected solutions.
-      </p>
-      <p>
-        With extensive experience designing solutions for large
-        multi-tenant application architectures on AWS, I'm also interested in exploring the new
-        cloud-native internet built on Cloudflare.
-      </p>
+      <div
+        class={css`
+          flex: 1;
+          margin-right: 20px;
+          @media (max-width: 768px) {
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+        `}
+      >
+        <h1>Hello, friends!</h1>
+        <p>
+          My name is Jake Brown and I'm a software engineer from Adelaide,
+          Australia. I do modern full-stack web development with an eye for
+          scalable, well architected solutions.
+        </p>
+        <p>
+          With extensive experience designing solutions for large multi-tenant
+          application architectures on AWS, I'm also interested in exploring the
+          new cloud-native internet built on Cloudflare.
+        </p>
+      </div>
+      <img
+        class={css`
+          height: 200px;
+          box-shadow: 1px 1px 5px grey;
+          align-self: center;
+          @media (min-width: 768px) {
+            margin-left: 50px;
+          }
+        `}
+        src="/static/img/headshot.jpg"
+        alt="Jake Brown"
+      />
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { Style } from "hono/css";
 import Nav from "../components/nav";
 import Loading from "../components/loading";
 import { Suspense } from "hono/jsx";
-import Footer from "../components/footer";
 
 export const base = jsxRenderer(
   ({ children }) => {
