@@ -91,7 +91,7 @@ export default function Nav() {
 
       <a
         style="margin-left: auto;"
-        href="https://github.com/jakebrown"
+        href="https://github.com/JakeBrown/jakebrown.net"
         target="_blank"
       >
         <img
