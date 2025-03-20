@@ -69,6 +69,9 @@ export default function Nav() {
       <NavLink href="/past" currentPath={currentPath}>
         Past
       </NavLink>
+      <NavLink href="/blog" currentPath={currentPath}>
+        Blog
+      </NavLink>
       <span
         class={css`
           padding-top: 0.5rem;

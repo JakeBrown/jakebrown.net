@@ -10,7 +10,6 @@ export default async function Page() {
         align-items: center;
         margin: 0px;
         @media (max-width: 768px) {
-          margin: 50px;
           flex-direction: column;
         }
       `}

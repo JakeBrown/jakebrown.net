@@ -30,6 +30,28 @@ body {
   flex-direction: column;
 }
 
+main {
+  padding-bottom: 50px;
+}
+
+q {
+  font-weight: 100;
+  font-style: italic;
+}
+
+.quote {
+  padding-left: 50px;
+  border-left: 1px solid var(--light-grey);
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-left: 50px;
+    margin-right: 50px;
+    flex-direction: column;
+  }
+}
+
 @media (min-width: 768px) {
   main {
     width: 80%;

@@ -56,12 +56,25 @@ export default async function Page() {
         <li>Container orchestration on GCP with Kubernetes</li>
         <li>Serverless workflows for data processing on AWS</li>
       </ul>
+      <h2>AI, Machine Learning, and Evolutionary Computing</h2>
+      <p>
+        The large and interesting data-sets we were working with at EyeSpace
+        <sup>&reg;</sup> led me to explore modern computing techniques for both
+        exploratory data analysis and inferential modelling. Internally and with
+        external collaborators at the University of Adelaide.
+      </p>
+      <p>
+        From analysing corneal data to extrapolate corneal height, through to
+        LLM based analysis of clinical notes.
+      </p>
       <h2>Textbook App</h2>
-      Worked with the author of{" "}
-      <a href="https://www.elsevierhealth.com.au/contact-lenses-9780702071683.html?srsltid=AfmBOoqSlMUTHCViD8QrIvh36w3QuPxnjfErtbFIoXdOd7TVPJTPbuJR">
-        <i>Contact Lenses, 6th Edition</i>
-      </a>{" "}
-      to develop an educational web app to accompany the textbook release.
+      <p>
+        I worked with the author of{" "}
+        <a href="https://www.elsevierhealth.com.au/contact-lenses-9780702071683.html?srsltid=AfmBOoqSlMUTHCViD8QrIvh36w3QuPxnjfErtbFIoXdOd7TVPJTPbuJR">
+          <i>Contact Lenses, 6th Edition</i>
+        </a>{" "}
+        to develop an educational web app to accompany the textbook release.
+      </p>
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default async function Page() {
       `}
     >
       <h1>Now</h1>
+      <p>Updated Friday 21 March 2025</p>
       <h2>Cloudflare</h2>
       <p>
         I'm currently exploring what full-stack application development looks
@@ -17,6 +18,24 @@ export default async function Page() {
         server, no external database. Just a worker script running on the edge
         and utilising using Cloudflare services.
       </p>
+      <p>
+        It's different to building on anything else. Pretty well summed up by
+        their post from 2018:
+      </p>
+      <div class="quote">
+        <p>
+          <q>
+            With the addition of Workers KV, Cloudflare Workers moves closer to
+            being a complete{" "}
+            <mark>compute platform embedded inside the Internet</mark>.
+          </q>
+        </p>
+        <p>
+          <a href="https://blog.cloudflare.com/introducing-workers-kv/">
+            Introducing Workers KV
+          </a>
+        </p>
+      </div>
       <h2>Consulting</h2>
       <p>
         After moving on from EyeSpace, I'm now consulting as a Solutions
