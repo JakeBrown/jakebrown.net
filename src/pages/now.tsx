@@ -10,7 +10,9 @@ export default async function Page() {
       `}
     >
       <h1>Now</h1>
-      <p>Updated Friday 21 March 2025</p>
+      <p>
+        <i>Updated Friday 21 March 2025</i>
+      </p>
       <h2>Cloudflare</h2>
       <p>
         I'm currently exploring what full-stack application development looks

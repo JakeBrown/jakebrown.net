@@ -39,6 +39,7 @@ export default async function Page() {
       <img
         class={css`
           height: 200px;
+          width: 200px;
           box-shadow: 1px 1px 5px grey;
           align-self: center;
           @media (min-width: 768px) {
