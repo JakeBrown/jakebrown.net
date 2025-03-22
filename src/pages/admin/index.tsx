@@ -1,15 +1,11 @@
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
-import { micromark } from "micromark";
-import Posts from "../kv/posts";
+import Posts from "../../kv/posts";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
-  const slug = ctx.req.param("slug");
   const posts = new Posts(ctx.env.blog);
-  const post = await posts.getPost(slug);
-  const content = micromark(post.content);
-
+  const postList = await posts.listPosts();
   return (
     <div
       class={css`
@@ -18,9 +14,12 @@ export default async function Page() {
         justify-content: center;
       `}
     >
-      <h1>{post.metadata.title}</h1>
-      <span>{post.metadata.date}</span>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <h1>Admin UI</h1>
+
+      <h2>Edit Posts</h2>
+      {postList.map((post) => (
+        <a href={`/admin/edit/${post.slug}`}>{post.metadata.title}</a>
+      ))}
     </div>
   );
 }

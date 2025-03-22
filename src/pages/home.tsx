@@ -35,6 +35,16 @@ export default async function Page() {
           GCP. I'm currently interested in exploring the possibilities of a new
           type of edge-native internet built on Cloudflare.
         </p>
+        <p>
+          You can find the source for this page on{" "}
+          <a
+            style="margin-left: auto;"
+            href="https://github.com/JakeBrown/jakebrown.net"
+            target="_blank"
+          >
+            GitHub
+          </a>
+        </p>
       </div>
       <img
         class={css`

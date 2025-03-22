@@ -8,8 +8,10 @@ import PastPage from "./pages/past";
 import NowPage from "./pages/now";
 import BlogPage from "./pages/blog";
 import BlogPost from "./pages/blogpost";
-import AdminPage from "./pages/admin";
+import AdminPage from "./pages/admin/index";
+import EditPost from "./pages/admin/editpost";
 import Posts from "./kv/posts";
+import { micromark } from "micromark";
 
 type Variables = {
   name: ComponentClass;
@@ -43,7 +45,7 @@ app.get("/blog", async (c) => {
   return c.render(<BlogPage />);
 });
 
-app.get("/blog/:post", async (c) => {
+app.get("/blog/:slug", async (c) => {
   return c.render(<BlogPost />);
 });
 
@@ -51,7 +53,11 @@ app.get("/admin", async (c) => {
   return c.render(<AdminPage />);
 });
 
-app.post("/api/posts", async (c) => {
+app.get("/admin/edit/:slug", async (c) => {
+  return c.render(<EditPost />);
+});
+
+app.post("/admin/api/posts", async (c) => {
   try {
     const { slug, title, date, tags, content } = (await c.req.parseBody()) as {
       slug: string;
@@ -74,7 +80,8 @@ app.post("/api/posts", async (c) => {
     const posts = new Posts(c.env.blog);
     await posts.addPost(post);
 
-    return c.text("Post created successfully");
+    const html = micromark(post.content);
+    return c.html(html);
   } catch (e: any) {
     return c.text(`Error: ${e.message}`, 400);
   }

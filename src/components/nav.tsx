@@ -60,9 +60,6 @@ export default function Nav() {
         background-color: var(--night-sky);
       `}
     >
-      <NavLink href="/" currentPath={currentPath}>
-        Home
-      </NavLink>
       <NavLink href="/now" currentPath={currentPath}>
         Now
       </NavLink>
@@ -72,7 +69,8 @@ export default function Nav() {
       <NavLink href="/blog" currentPath={currentPath}>
         Blog
       </NavLink>
-      <span
+      <a
+        href="/"
         class={css`
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
@@ -84,13 +82,14 @@ export default function Nav() {
           font-weight: 900;
           line-height: 1.75rem;
           color: var(--wheat);
+          text-decoration: none;
           @media (max-width: 768px) {
             display: none;
           }
         `}
       >
         Jake Brown
-      </span>
+      </a>
 
       <a
         style="margin-left: auto;"
