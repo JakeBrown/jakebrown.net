@@ -36,7 +36,7 @@ export default async function Page() {
           type of edge-native internet built on Cloudflare.
         </p>
         <p>
-          You can find the source for this page on{" "}
+          You can find the source for this site on{" "}
           <a
             style="margin-left: auto;"
             href="https://github.com/JakeBrown/jakebrown.net"

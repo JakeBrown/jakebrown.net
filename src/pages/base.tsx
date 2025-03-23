@@ -20,9 +20,7 @@ export const base = jsxRenderer(
         </head>
         <body hx-ext="preload">
           <Nav />
-          <main>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </main>
+          <main>{children}</main>
         </body>
       </html>
     );

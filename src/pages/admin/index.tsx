@@ -12,9 +12,27 @@ export default async function Page() {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
+        .new-button {
+          padding: 0.5rem 1rem;
+          margin: 0.5rem;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          border: none;
+          border-radius: 0.25rem;
+          text-decoration: none;
+          width: 100px;
+          text-align: center;
+          background-color: var(--blue);
+          color: var(--white);
+          cursor: pointer;
+        }
       `}
     >
       <h1>Admin UI</h1>
+      <a class="new-button" href="/admin/new">
+        New Post
+      </a>
 
       <h2>Edit Posts</h2>
       {postList.map((post) => (

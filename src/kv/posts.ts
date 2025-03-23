@@ -7,7 +7,6 @@ type Post = {
 type PostMetadata = {
   title: string;
   date: string;
-  tags: string[];
 };
 
 export type { Post };
@@ -25,6 +24,15 @@ export default class Posts {
     }
     this.kv.put(post.slug, post.content, { metadata: post.metadata });
     return post;
+  }
+
+  async updatePost(post: Post): Promise<Post> {
+    if (await this.kv.get(post.slug)) {
+      this.kv.put(post.slug, post.content, { metadata: post.metadata });
+      return post;
+    } else {
+      throw new Error("Post not found");
+    }
   }
 
   async getPost(slug: string): Promise<Post> {
@@ -64,6 +72,11 @@ export default class Posts {
         },
       ];
     });
+    // Sort by date
+    posts = posts.sort((a, b) => {
+      return a.metadata.date.localeCompare(b.metadata.date);
+    });
+    posts = posts.reverse();
     return posts;
   }
 }

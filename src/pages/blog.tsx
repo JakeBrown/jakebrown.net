@@ -12,6 +12,21 @@ export default async function Page() {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        ul {
+          padding-left: 0;
+        }
+        li {
+          margin-left: 0px;
+          text-decoration: none;
+          list-style-type: none;
+        }
+        a {
+          text-decoration: none;
+        }
+        span {
+          color: var(--burnt-orange);
+          font-size: 0.8em;
+        }
       `}
     >
       <h1>Blog</h1>
@@ -21,9 +36,17 @@ export default async function Page() {
         in the process of building this on Cloudflare KV, and moving content
         over from the previous system.
       </p>
-      {postList.map((post) => (
-        <a href={`/blog/${post.slug}`}>{post.metadata.title}</a>
-      ))}
+      <ul>
+        <h2>Posts</h2>
+
+        {postList.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug}`}>
+              {post.metadata.title} <span>{post.metadata.date}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

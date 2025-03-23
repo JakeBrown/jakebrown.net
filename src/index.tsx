@@ -9,7 +9,8 @@ import NowPage from "./pages/now";
 import BlogPage from "./pages/blog";
 import BlogPost from "./pages/blogpost";
 import AdminPage from "./pages/admin/index";
-import EditPost from "./pages/admin/editpost";
+import EditPost from "./pages/admin/edit";
+import NewPost from "./pages/admin/new";
 import Posts from "./kv/posts";
 import { micromark } from "micromark";
 
@@ -57,13 +58,16 @@ app.get("/admin/edit/:slug", async (c) => {
   return c.render(<EditPost />);
 });
 
-app.post("/admin/api/posts", async (c) => {
+app.get("/admin/new", async (c) => {
+  return c.render(<NewPost />);
+});
+
+app.post("/admin/hx-posts", async (c) => {
   try {
-    const { slug, title, date, tags, content } = (await c.req.parseBody()) as {
+    const { slug, title, date, content } = (await c.req.parseBody()) as {
       slug: string;
       title: string;
       date: string;
-      tags: string;
       content: string;
     };
 
@@ -73,15 +77,41 @@ app.post("/admin/api/posts", async (c) => {
       metadata: {
         title,
         date,
-        tags: tags.split(",").map((tag) => tag.trim()),
       },
     };
 
     const posts = new Posts(c.env.blog);
     await posts.addPost(post);
+    const res = c.text(`Post created: ${post.slug}`, 201);
+    res.headers.set("hx-redirect", "/admin");
+    return res;
+  } catch (e: any) {
+    return c.text(`Error: ${e.message}`, 400);
+  }
+});
 
-    const html = micromark(post.content);
-    return c.html(html);
+app.put("/admin/hx-posts", async (c) => {
+  try {
+    const { slug, title, date, content } = (await c.req.parseBody()) as {
+      slug: string;
+      title: string;
+      date: string;
+      content: string;
+    };
+
+    const post = {
+      slug,
+      content,
+      metadata: {
+        title,
+        date,
+      },
+    };
+    const posts = new Posts(c.env.blog);
+    await posts.updatePost(post);
+    const res = c.text(`Post updated: ${post.slug}`, 201);
+    res.headers.set("hx-redirect", "/admin");
+    return res;
   } catch (e: any) {
     return c.text(`Error: ${e.message}`, 400);
   }

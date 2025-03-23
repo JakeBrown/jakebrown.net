@@ -1,3 +1,5 @@
+import { css } from "hono/css";
+
 export default async function Page() {
   return (
     <div class="main mx-auto">
@@ -75,6 +77,32 @@ export default async function Page() {
         </a>{" "}
         to develop an educational web app to accompany the textbook release.
       </p>
+      <div
+        class={css`
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        `}
+      >
+        <img
+          class={css`
+            height: 300px;
+            align-self: center;
+            box-shadow: 1px 1px 5px grey;
+          `}
+          src="/static/img/contact-lenses-textbook.jpg"
+          alt="Truck"
+        />
+        <img
+          class={css`
+            height: 300px;
+            align-self: center;
+            box-shadow: 1px 1px 5px grey;
+          `}
+          src="/static/img/textbook-app.jpg"
+          alt="Truck"
+        />
+      </div>
     </div>
   );
 }
