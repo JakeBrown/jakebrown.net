@@ -21,8 +21,11 @@ export default async function Page() {
         and utilising using Cloudflare services.
       </p>
       <p>
-        It's different to building on anything else. Pretty well summed up by
-        their post from 2018:
+        It's different to building on anything else. I've often thought of it
+        like this: in the traditional cloud model, big fat pipes connect large
+        data centers to each other and to the end users. Servers running in
+        those data centers do the compute. But with Cloudflare, there are no
+        servers (in this abstraction), and the compute happens inside the pipes.
       </p>
       <div class="quote">
         <p>
@@ -34,7 +37,7 @@ export default async function Page() {
         </p>
         <p>
           <a href="https://blog.cloudflare.com/introducing-workers-kv/">
-            Introducing Workers KV
+            Introducing Workers KV (2018)
           </a>
         </p>
       </div>
