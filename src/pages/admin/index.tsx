@@ -39,7 +39,7 @@ export default async function Page() {
         <tr>
           <th>Title</th>
           <th>Slug</th>
-          <th>Published</th>
+          <th>Status</th>
         </tr>
         {postList.map((post) => (
           <tr>
