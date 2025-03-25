@@ -6,6 +6,7 @@ type Post = {
 
 type PostMetadata = {
   title: string;
+  status: "draft" | "unlisted" | "published";
   date: string;
 };
 

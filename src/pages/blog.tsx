@@ -5,7 +5,8 @@ import Posts from "../kv/posts";
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
   const posts = new Posts(ctx.env.blog);
-  const postList = await posts.listPosts();
+  let postList = await posts.listPosts();
+  postList = postList.filter((post) => post.metadata.status === "published");
   return (
     <div
       class={css`

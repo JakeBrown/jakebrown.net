@@ -24,7 +24,7 @@ export default async function Page() {
           class={css`
             display: grid;
             gap: 10px;
-            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
+            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 2fr;
             label {
               align-self: center;
               text-align: right;
@@ -34,6 +34,9 @@ export default async function Page() {
               font-size: 0.75rem;
               line-height: 1rem;
               padding: 5px;
+            }
+            input[type="checkbox"] {
+              align-self: center;
             }
             textarea {
               margin: 0px;
@@ -57,6 +60,12 @@ export default async function Page() {
 
           <label htmlFor="date">Date</label>
           <input type="date" id="date" name="date" required />
+
+          <select id="status" name="status" required>
+            <option value="draft">Draft</option>
+            <option value="unlisted">Unlisted</option>
+            <option value="published">Published</option>
+          </select>
 
           <textarea id="content" name="content" rows={25} required></textarea>
 

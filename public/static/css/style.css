@@ -133,6 +133,12 @@ textarea {
   border-radius: 0.25rem;
 }
 
+select {
+  font-size: 0.8rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.25rem;
+}
+
 button {
   padding: 0.5rem 1rem;
   margin: 0.5rem;

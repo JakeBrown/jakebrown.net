@@ -35,9 +35,22 @@ export default async function Page() {
       </a>
 
       <h2>Edit Posts</h2>
-      {postList.map((post) => (
-        <a href={`/admin/edit/${post.slug}`}>{post.metadata.title}</a>
-      ))}
+      <table class={css``}>
+        <tr>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Published</th>
+        </tr>
+        {postList.map((post) => (
+          <tr>
+            <td>{post.metadata.title}</td>
+            <td>
+              <a href={`/admin/edit/${post.slug}`}>{post.slug}</a>
+            </td>
+            <td>{post.metadata.status}</td>
+          </tr>
+        ))}
+      </table>
     </div>
   );
 }

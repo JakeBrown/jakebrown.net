@@ -1,15 +1,9 @@
 import { css } from "hono/css";
-import { useRequestContext } from "hono/jsx-renderer";
 import { micromark } from "micromark";
-import Posts from "../kv/posts";
+import { Post } from "../kv/posts";
 
-export default async function Page() {
-  const ctx = useRequestContext<{ Bindings: Env }>();
-  const slug = ctx.req.param("slug");
-  const posts = new Posts(ctx.env.blog);
-  const post = await posts.getPost(slug);
+export default async function Page({ post }: { post: Post }) {
   const content = micromark(post.content);
-
   return (
     <div
       class={css`

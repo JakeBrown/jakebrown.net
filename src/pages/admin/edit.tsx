@@ -31,7 +31,7 @@ export default async function Page() {
           class={css`
             display: grid;
             gap: 10px;
-            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
+            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 2fr;
             label {
               align-self: center;
               text-align: right;
@@ -41,6 +41,9 @@ export default async function Page() {
               font-size: 0.75rem;
               line-height: 1rem;
               padding: 5px;
+            }
+            input[type="checkbox"] {
+              align-self: center;
             }
             textarea {
               margin: 0px;
@@ -83,6 +86,27 @@ export default async function Page() {
             value={post?.metadata.date}
             required
           />
+
+          <select id="status" name="status" required>
+            <option
+              value="draft"
+              selected={post.metadata.status === "draft" ? true : false}
+            >
+              Draft
+            </option>
+            <option
+              value="unlisted"
+              selected={post.metadata.status === "unlisted" ? true : false}
+            >
+              Unlisted
+            </option>
+            <option
+              value="published"
+              selected={post.metadata.status === "published" ? true : false}
+            >
+              Published
+            </option>
+          </select>
 
           <textarea id="content" name="content" rows={25} required>
             {post?.content}

@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Hono, HonoRequest } from "hono";
 import { basicAuth } from "hono/basic-auth";
 import { base } from "./pages/base";
 import { ComponentClass } from "hono/jsx";
@@ -11,7 +11,7 @@ import BlogPost from "./pages/blogpost";
 import AdminPage from "./pages/admin/index";
 import EditPost from "./pages/admin/edit";
 import NewPost from "./pages/admin/new";
-import Posts from "./kv/posts";
+import Posts, { Post } from "./kv/posts";
 import { micromark } from "micromark";
 
 type Variables = {
@@ -47,7 +47,13 @@ app.get("/blog", async (c) => {
 });
 
 app.get("/blog/:slug", async (c) => {
-  return c.render(<BlogPost />);
+  const slug = c.req.param("slug");
+  const posts = new Posts(c.env.blog);
+  const post = await posts.getPost(slug);
+  if (post.metadata.status == "draft") {
+    return c.text("Not published", 404);
+  }
+  return c.render(<BlogPost post={post} />);
 });
 
 app.get("/admin", async (c) => {
@@ -62,24 +68,30 @@ app.get("/admin/new", async (c) => {
   return c.render(<NewPost />);
 });
 
+async function parsePost(r: HonoRequest): Promise<Post> {
+  const parsedBody = await r.parseBody();
+  const { slug, title, date, content, status } = parsedBody as {
+    slug: string;
+    title: string;
+    date: string;
+    content: string;
+    status: "draft" | "unlisted" | "published";
+  };
+  const post = {
+    slug,
+    content,
+    metadata: {
+      title,
+      date,
+      status,
+    },
+  };
+  return post;
+}
+
 app.post("/admin/hx-posts", async (c) => {
   try {
-    const { slug, title, date, content } = (await c.req.parseBody()) as {
-      slug: string;
-      title: string;
-      date: string;
-      content: string;
-    };
-
-    const post = {
-      slug,
-      content,
-      metadata: {
-        title,
-        date,
-      },
-    };
-
+    const post = await parsePost(c.req);
     const posts = new Posts(c.env.blog);
     await posts.addPost(post);
     const res = c.text(`Post created: ${post.slug}`, 201);
@@ -92,21 +104,7 @@ app.post("/admin/hx-posts", async (c) => {
 
 app.put("/admin/hx-posts", async (c) => {
   try {
-    const { slug, title, date, content } = (await c.req.parseBody()) as {
-      slug: string;
-      title: string;
-      date: string;
-      content: string;
-    };
-
-    const post = {
-      slug,
-      content,
-      metadata: {
-        title,
-        date,
-      },
-    };
+    const post = await parsePost(c.req);
     const posts = new Posts(c.env.blog);
     await posts.updatePost(post);
     const res = c.text(`Post updated: ${post.slug}`, 201);
