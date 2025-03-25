@@ -48,11 +48,14 @@ app.get("/blog", async (c) => {
 
 app.get("/blog/:slug", async (c) => {
   const slug = c.req.param("slug");
+  console.log("loading post", slug);
   const posts = new Posts(c.env.blog);
   const post = await posts.getPost(slug);
   if (post.metadata.status == "draft") {
+    console.log("this is draft");
     return c.text("Not published", 404);
   }
+  console.log("rendering post");
   return c.render(<BlogPost post={post} />);
 });
 

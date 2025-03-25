@@ -187,3 +187,23 @@ td {
 tbody tr:last-child td {
   border-bottom: none;
 }
+
+pre {
+  background: #011627;
+  color: white;
+  padding: 0.5em;
+  font-size: 1em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  display: block;
+  overflow-x: auto;
+}
+
+pre code,
+code.hljs {
+  font-family: "Fira Code", monospace;
+  font-size: 1em;
+  line-height: 1.5em;
+  white-space: pre;
+}
