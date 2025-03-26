@@ -44,6 +44,8 @@ export default async function Page() {
           >
             GitHub
           </a>
+          . It is built using <a href="https://hono.dev">Hono</a>, and deployed
+          to Cloudflare Workers.
         </p>
       </div>
       <img
