@@ -5,7 +5,8 @@ export default async function Page() {
     <div class="main mx-auto">
       <h1>Past Projects</h1>
       <p>
-        I've been developing software professionally for 15+ years. Here is how I've spent the bulk of my time.
+        I've been developing software professionally for 15+ years. Here is how
+        I've spent the bulk of my time.
       </p>
       <h2>Academic Research</h2>
       <p>
