@@ -3,5 +3,6 @@
 interface Env {
   blog: KVNamespace;
   PASSWORD: string;
+  jakebrown_blog: R2Bucket;
   ASSETS: Fetcher;
 }

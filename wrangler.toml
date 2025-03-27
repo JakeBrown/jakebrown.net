@@ -16,5 +16,10 @@ binding = "blog"
 id = "3e8ab6dc7df54c09ac677a7c1175d2fd"
 preview_id = "3e8ab6dc7df54c09ac677a7c1175d2fd"
 
+[[r2_buckets]]
+bucket_name = "jakebrown-blog"
+preview_bucket_name = "jakebrown-blog"
+binding = "jakebrown_blog"
+
 [observability]
 enabled = true

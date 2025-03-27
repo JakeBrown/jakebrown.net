@@ -33,16 +33,15 @@ export default async function Page() {
       <h1>Blog</h1>
 
       <p>
-        Code snippets, conference notes, educational material and musings. I'm
-        in the process of building this on Cloudflare KV, and moving content
-        over from the previous system.
+        Code snippets, conference notes and other things to share. I'm in the
+        process of building this on Cloudflare KV and moving content over.
       </p>
       <ul>
         <h2>Posts</h2>
 
         {postList.map((post) => (
           <li>
-            <a href={`/blog/${post.slug}`}>
+            <a href={`/blog/${post.slug}/`}>
               {post.metadata.title} <span>{post.metadata.date}</span>
             </a>
           </li>

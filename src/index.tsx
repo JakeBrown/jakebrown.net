@@ -12,7 +12,7 @@ import AdminPage from "./pages/admin/index";
 import EditPost from "./pages/admin/edit";
 import NewPost from "./pages/admin/new";
 import Posts, { Post } from "./kv/posts";
-import { micromark } from "micromark";
+import { appendTrailingSlash } from "hono/trailing-slash";
 
 type Variables = {
   name: ComponentClass;
@@ -20,6 +20,7 @@ type Variables = {
 
 const app = new Hono<{ Variables: Variables; Bindings: Env }>();
 
+//app.use(appendTrailingSlash());
 app.use(base);
 
 app.use("/admin/*", async (c, next) => {
@@ -46,7 +47,26 @@ app.get("/blog", async (c) => {
   return c.render(<BlogPage />);
 });
 
-app.get("/blog/:slug", async (c) => {
+app.get("/blog/:slug/:filename", async (c) => {
+  const slug = c.req.param("slug");
+  const filename = c.req.param("filename");
+  const key = `${slug}/${filename}`;
+  const object = await c.env.jakebrown_blog.get(key);
+
+  if (object === null) {
+    return new Response("Object Not Found", { status: 404 });
+  }
+
+  const headers = new Headers();
+  object.writeHttpMetadata(headers);
+  headers.set("etag", object.httpEtag);
+
+  return new Response(object.body, {
+    headers,
+  });
+});
+
+app.get("/blog/:slug/", async (c) => {
   const slug = c.req.param("slug");
   console.log("loading post", slug);
   const posts = new Posts(c.env.blog);

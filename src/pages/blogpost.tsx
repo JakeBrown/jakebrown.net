@@ -37,6 +37,12 @@ export default async function Page({ post }: { post: Post }) {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        img {
+          max-width: 50%;
+          margin: auto;
+          display: block;
+          border: 1px solid black;
+        }
       `}
     >
       <h1>{post.metadata.title}</h1>
