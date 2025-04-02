@@ -58,6 +58,10 @@ export default function Nav() {
         display: flex;
         padding: 1rem;
         background-color: var(--night-sky);
+        font-family: "Fira Code";
+        @media (max-width: 768px) {
+          padding: 0.5rem;
+        }
       `}
     >
       <NavLink href="/now" currentPath={currentPath}>
@@ -65,9 +69,6 @@ export default function Nav() {
       </NavLink>
       <NavLink href="/past" currentPath={currentPath}>
         Past
-      </NavLink>
-      <NavLink href="/blog" currentPath={currentPath}>
-        Blog
       </NavLink>
       <a
         href="/"
@@ -83,8 +84,10 @@ export default function Nav() {
           line-height: 1.75rem;
           color: var(--wheat);
           text-decoration: none;
+          font-family: "Fira Code";
           @media (max-width: 768px) {
-            display: none;
+            font-weight: 300;
+            margin-right: 0rem;
           }
         `}
       >
@@ -95,6 +98,11 @@ export default function Nav() {
         style="margin-left: auto;"
         href="https://github.com/JakeBrown/jakebrown.net"
         target="_blank"
+        class={css`
+          @media (max-width: 768px) {
+            display: none;
+          }
+        `}
       >
         <img
           style="
@@ -104,7 +112,6 @@ export default function Nav() {
           "
           src="/static/img/github-mark-white.svg"
           alt="GitHub Logo"
-          width="40"
           height="40"
         />
       </a>

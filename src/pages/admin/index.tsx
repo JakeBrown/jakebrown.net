@@ -1,11 +1,17 @@
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
-import Posts from "../../kv/posts";
+import { drizzle } from "drizzle-orm/d1";
+import { posts } from "#src//db/schema";
+import { desc } from "drizzle-orm";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
-  const posts = new Posts(ctx.env.blog);
-  const postList = await posts.listPosts();
+  const db = drizzle(ctx.env.DB);
+  const postList = await db
+    .select()
+    .from(posts)
+    .orderBy(desc(posts.date))
+    .all();
   return (
     <div
       class={css`
@@ -40,14 +46,16 @@ export default async function Page() {
           <th>Title</th>
           <th>Slug</th>
           <th>Status</th>
+          <th>Tags</th>
         </tr>
         {postList.map((post) => (
           <tr>
-            <td>{post.metadata.title}</td>
+            <td>{post.title}</td>
             <td>
               <a href={`/admin/edit/${post.slug}`}>{post.slug}</a>
             </td>
-            <td>{post.metadata.status}</td>
+            <td>{post.status}</td>
+            <td>{post.tags}</td>
           </tr>
         ))}
       </table>

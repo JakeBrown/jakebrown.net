@@ -4,5 +4,6 @@ interface Env {
   blog: KVNamespace;
   PASSWORD: string;
   jakebrown_blog: R2Bucket;
+  DB: D1Database;
   ASSETS: Fetcher;
 }

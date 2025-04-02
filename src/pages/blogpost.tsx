@@ -1,36 +1,8 @@
 import { css } from "hono/css";
-import { Post } from "../kv/posts";
-import markdownit from "markdown-it";
-import hljs from "highlight.js/lib/core";
-import typescript from "highlight.js/lib/languages/typescript";
-import javascript from "highlight.js/lib/languages/javascript";
-import python from "highlight.js/lib/languages/python";
-import cssLang from "highlight.js/lib/languages/css";
-import golang from "highlight.js/lib/languages/go";
-import shell from "highlight.js/lib/languages/shell";
-import json from "highlight.js/lib/languages/json";
-hljs.registerLanguage("typescript", typescript);
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("python", python);
-hljs.registerLanguage("css", cssLang);
-hljs.registerLanguage("go", golang);
-hljs.registerLanguage("shell", shell);
-hljs.registerLanguage("json", json);
+import type { Post } from "../db/schema";
+import { render } from "../renderer";
 
 export default async function Page({ post }: { post: Post }) {
-  const md = markdownit({
-    highlight: function (str, lang) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(str, { language: lang }).value;
-        } catch (__) {
-          console.log("error");
-        }
-      }
-      return ""; // use external default escaping
-    },
-  });
-  const content = md.render(post.content);
   return (
     <div
       class={css`
@@ -43,11 +15,54 @@ export default async function Page({ post }: { post: Post }) {
           display: block;
           border: 1px solid black;
         }
+        blockquote {
+          border-left: 5px solid var(--burnt-orange);
+          padding-left: 10px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          margin-left: 0px;
+        }
+
+        .date {
+          font-size: 0.75rem;
+          color: var(--burnt-orange);
+          margin-top: 20px;
+        }
       `}
     >
-      <h1>{post.metadata.title}</h1>
-      <span>{post.metadata.date}</span>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <h1>{post.title}</h1>
+      <div
+        class={css`
+          a {
+            .tag {
+              background-color: var(--burnt-orange);
+              color: white;
+              padding: 5px;
+              border-radius: 5px;
+              margin-right: 5px;
+            }
+
+            text-decoration: none;
+          }
+        `}
+      >
+        {post.tags &&
+          post.tags
+            .replaceAll(" ", "")
+            .split(",")
+            .map((tag) => (
+              <a href={`/?tag=${tag}`}>
+                <span class="tag">{tag}</span>
+              </a>
+            ))}
+      </div>
+      <div class="date">
+        <span>{post.date}</span>
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: render(post.introContent) }} />
+      {post.moreContent && (
+        <div dangerouslySetInnerHTML={{ __html: render(post.moreContent) }} />
+      )}
     </div>
   );
 }

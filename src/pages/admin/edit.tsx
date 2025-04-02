@@ -1,12 +1,20 @@
-import Posts from "#src//kv/posts.js";
+import { drizzle } from "drizzle-orm/d1";
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
+import { takeUniqueOrThrow } from "../../db";
+import { posts } from "../../db/schema";
+import { eq } from "drizzle-orm";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
   const slug = ctx.req.param("slug");
-  const posts = new Posts(ctx.env.blog);
-  const post = await posts.getPost(slug);
+  console.log("loading post", slug);
+  const db = drizzle(ctx.env.DB);
+  const post = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.slug, slug))
+    .then(takeUniqueOrThrow);
 
   return (
     <div>
@@ -21,17 +29,18 @@ export default async function Page() {
           }
         `}
       >
-        <h1>Edit Post</h1>
+        <h1>Edit Post New</h1>
 
         <form
           hx-put="/admin/hx-posts"
           hx-trigger="submit"
           hx-target="#response"
+          hx-target-error="#error"
           hx-swap="innerHTML"
           class={css`
             display: grid;
             gap: 10px;
-            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 2fr;
+            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
             label {
               align-self: center;
               text-align: right;
@@ -49,9 +58,6 @@ export default async function Page() {
               margin: 0px;
               font-size: 0.75rem;
               line-height: 1rem;
-            }
-            label[for="content"],
-            textarea[name="content"] {
               grid-column: 1 / -1;
             }
 
@@ -74,47 +80,54 @@ export default async function Page() {
             type="text"
             id="title"
             name="title"
-            value={post?.metadata.title}
+            value={post.title}
             required
           />
 
           <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={post?.metadata.date}
-            required
-          />
+          <input type="date" id="date" name="date" value={post.date} required />
 
+          <label htmlFor="status">Status</label>
           <select id="status" name="status" required>
             <option
               value="draft"
-              selected={post.metadata.status === "draft" ? true : false}
+              selected={post.status === "draft" ? true : false}
             >
               Draft
             </option>
             <option
               value="unlisted"
-              selected={post.metadata.status === "unlisted" ? true : false}
+              selected={post.status === "unlisted" ? true : false}
             >
               Unlisted
             </option>
             <option
               value="published"
-              selected={post.metadata.status === "published" ? true : false}
+              selected={post.status === "published" ? true : false}
             >
               Published
             </option>
           </select>
 
-          <textarea id="content" name="content" rows={25} required>
-            {post?.content}
+          <label htmlFor="tags">Tags</label>
+          <input
+            id="tags"
+            name="tags"
+            type="text"
+            value={post.tags || ""}
+          ></input>
+
+          <textarea id="introContent" name="introContent" rows={25} required>
+            {post.introContent}
           </textarea>
 
-          <div id="response"></div>
+          <textarea id="moreContent" name="moreContent" rows={25}>
+            {post.moreContent}
+          </textarea>
           <button type="submit">Save</button>
         </form>
+        <div id="error"></div>
+        <div id="response"></div>
       </div>
     </div>
   );

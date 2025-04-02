@@ -10,9 +10,16 @@ export default async function Page() {
       `}
     >
       <h1>Now</h1>
-      <p>
+      <span>
         <i>Updated Friday 21 March 2025</i>
+      </span>
+
+      <p>
+        I'm living on the Fleurieu Peninsula in South Australia and currently
+        interested in exploring the possibilities of a new type of edge-native
+        internet built on Cloudflare.
       </p>
+
       <h2>Cloudflare</h2>
       <p>
         I'm currently exploring what full-stack application development looks
@@ -40,6 +47,11 @@ export default async function Page() {
             Introducing Workers KV (2018)
           </a>
         </p>
+
+        <p>
+          You can find the source for this site on GitHub. It is built using
+          Hono, and deployed to Cloudflare Workers.
+        </p>
       </div>
       <h2>Consulting</h2>
       <p>
@@ -65,7 +77,8 @@ export default async function Page() {
 
       <img
         class={css`
-          height: 500px;
+          width: 90%;
+          max-width: 600px;
           align-self: center;
           box-shadow: 1px 1px 5px grey;
         `}

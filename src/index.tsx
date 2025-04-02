@@ -6,13 +6,14 @@ import { ComponentClass } from "hono/jsx";
 import HomePage from "./pages/home";
 import PastPage from "./pages/past";
 import NowPage from "./pages/now";
-import BlogPage from "./pages/blog";
 import BlogPost from "./pages/blogpost";
 import AdminPage from "./pages/admin/index";
 import EditPost from "./pages/admin/edit";
 import NewPost from "./pages/admin/new";
-import Posts, { Post } from "./kv/posts";
-import { appendTrailingSlash } from "hono/trailing-slash";
+import { posts } from "./db/schema";
+import { drizzle } from "drizzle-orm/d1";
+import { eq } from "drizzle-orm";
+import { takeUniqueOrThrow } from "./db";
 
 type Variables = {
   name: ComponentClass;
@@ -23,7 +24,13 @@ const app = new Hono<{ Variables: Variables; Bindings: Env }>();
 //app.use(appendTrailingSlash());
 app.use(base);
 
+app.use("/*", async (c, next) => {
+  c.header("Cache-Control", "public, max-age=3600");
+  await next();
+});
+
 app.use("/admin/*", async (c, next) => {
+  c.header("Cache-Control", "no-store");
   const auth = basicAuth({
     username: "admin",
     password: c.env.PASSWORD,
@@ -41,10 +48,6 @@ app.get("/now", async (c) => {
 
 app.get("/past", async (c) => {
   return c.render(<PastPage />);
-});
-
-app.get("/blog", async (c) => {
-  return c.render(<BlogPage />);
 });
 
 app.get("/blog/:slug/:filename", async (c) => {
@@ -69,9 +72,13 @@ app.get("/blog/:slug/:filename", async (c) => {
 app.get("/blog/:slug/", async (c) => {
   const slug = c.req.param("slug");
   console.log("loading post", slug);
-  const posts = new Posts(c.env.blog);
-  const post = await posts.getPost(slug);
-  if (post.metadata.status == "draft") {
+  const db = drizzle(c.env.DB);
+  const post = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.slug, slug))
+    .then(takeUniqueOrThrow);
+  if (post.status == "draft") {
     console.log("this is draft");
     return c.text("Not published", 404);
   }
@@ -91,49 +98,66 @@ app.get("/admin/new", async (c) => {
   return c.render(<NewPost />);
 });
 
-async function parsePost(r: HonoRequest): Promise<Post> {
+async function parsePost(r: HonoRequest): Promise<typeof posts.$inferInsert> {
   const parsedBody = await r.parseBody();
-  const { slug, title, date, content, status } = parsedBody as {
-    slug: string;
-    title: string;
-    date: string;
-    content: string;
-    status: "draft" | "unlisted" | "published";
-  };
+  console.log(parsedBody);
+  const { slug, title, date, introContent, moreContent, status, tags } =
+    parsedBody as {
+      slug: string;
+      title: string;
+      date: string;
+      introContent: string;
+      tags: string;
+      moreContent: string;
+      status: "draft" | "unlisted" | "published";
+    };
+  console.log("parsed tags", tags);
   const post = {
     slug,
-    content,
-    metadata: {
-      title,
-      date,
-      status,
-    },
+    introContent,
+    moreContent: moreContent || undefined,
+    title,
+    tags,
+    date,
+    status,
   };
+  console.log("parsed post", post);
   return post;
 }
 
 app.post("/admin/hx-posts", async (c) => {
   try {
     const post = await parsePost(c.req);
-    const posts = new Posts(c.env.blog);
-    await posts.addPost(post);
+    const db = drizzle(c.env.DB);
+    await db.insert(posts).values(post).execute();
     const res = c.text(`Post created: ${post.slug}`, 201);
     res.headers.set("hx-redirect", "/admin");
     return res;
   } catch (e: any) {
+    console.log(e);
     return c.text(`Error: ${e.message}`, 400);
   }
 });
 
 app.put("/admin/hx-posts", async (c) => {
   try {
-    const post = await parsePost(c.req);
-    const posts = new Posts(c.env.blog);
-    await posts.updatePost(post);
-    const res = c.text(`Post updated: ${post.slug}`, 201);
+    const updatedPost = await parsePost(c.req);
+    const db = drizzle(c.env.DB);
+    const existingPost = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.slug, updatedPost.slug))
+      .then(takeUniqueOrThrow);
+    await db
+      .update(posts)
+      .set(updatedPost)
+      .where(eq(posts.slug, existingPost.slug))
+      .execute();
+    const res = c.text(`Post updated: ${existingPost.slug}`, 201);
     res.headers.set("hx-redirect", "/admin");
     return res;
   } catch (e: any) {
+    console.log(e);
     return c.text(`Error: ${e.message}`, 400);
   }
 });

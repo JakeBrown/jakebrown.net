@@ -20,11 +20,12 @@ export default async function Page() {
           hx-post="/admin/hx-posts"
           hx-trigger="submit"
           hx-target="#response"
+          hx-target-error="#error"
           hx-swap="innerHTML"
           class={css`
             display: grid;
             gap: 10px;
-            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 2fr;
+            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr;
             label {
               align-self: center;
               text-align: right;
@@ -42,9 +43,6 @@ export default async function Page() {
               margin: 0px;
               font-size: 0.75rem;
               line-height: 1rem;
-            }
-            label[for="content"],
-            textarea[name="content"] {
               grid-column: 1 / -1;
             }
 
@@ -61,17 +59,28 @@ export default async function Page() {
           <label htmlFor="date">Date</label>
           <input type="date" id="date" name="date" required />
 
+          <label htmlFor="status">Status</label>
           <select id="status" name="status" required>
             <option value="draft">Draft</option>
             <option value="unlisted">Unlisted</option>
             <option value="published">Published</option>
           </select>
 
-          <textarea id="content" name="content" rows={25} required></textarea>
+          <label htmlFor="tags">Tags</label>
+          <input type="text" id="tags" name="tags"></input>
 
-          <div id="response"></div>
+          <textarea
+            id="introContent"
+            name="introContent"
+            rows={25}
+            required
+          ></textarea>
+
+          <textarea id="moreContent" name="moreContent" rows={25}></textarea>
           <button type="submit">Create</button>
         </form>
+        <div id="error"></div>
+        <div id="response"></div>
       </div>
     </div>
   );

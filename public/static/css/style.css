@@ -46,8 +46,9 @@ q {
 
 @media (max-width: 768px) {
   main {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
     flex-direction: column;
   }
 }
@@ -86,6 +87,12 @@ h1 {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--burnt-orange);
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 h2 {
@@ -96,6 +103,10 @@ h2 {
   font-weight: 700;
   text-transform: uppercase;
   color: var(--night-sky);
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 
 p {
@@ -108,6 +119,13 @@ ul {
   font-size: 1.125rem;
   line-height: 1.75rem;
   list-style-type: disc;
+  list-style-position: inside;
+}
+
+ol {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   list-style-position: inside;
 }
 
@@ -200,6 +218,7 @@ pre {
   overflow-x: auto;
   padding-top: 30px;
   padding-bottom: 30px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 pre code,

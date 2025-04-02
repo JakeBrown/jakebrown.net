@@ -11,11 +11,6 @@ routes = [
 directory = "public"
 binding = "ASSETS"
 
-[[kv_namespaces]]
-binding = "blog"
-id = "3e8ab6dc7df54c09ac677a7c1175d2fd"
-preview_id = "3e8ab6dc7df54c09ac677a7c1175d2fd"
-
 [[r2_buckets]]
 bucket_name = "jakebrown-blog"
 preview_bucket_name = "jakebrown-blog"
@@ -23,3 +18,8 @@ binding = "jakebrown_blog"
 
 [observability]
 enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "jakebrown.net"
+database_id = "6c21fae9-2f6e-4a21-8661-249979f72052"
