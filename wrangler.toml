@@ -7,6 +7,15 @@ routes = [
   { pattern = "www.jakebrown.net", custom_domain = true }
 ]
 
+[[rules]] 
+type = "Text"
+globs = ["**/*.sql"]
+fallthrough = true
+
+[[durable_objects.bindings]]
+name = "DurableDatabase"
+class_name = "DurableDatabase"
+
 [assets]
 directory = "public"
 binding = "ASSETS"
@@ -19,7 +28,14 @@ binding = "jakebrown_blog"
 [observability]
 enabled = true
 
-[[d1_databases]]
-binding = "DB"
-database_name = "jakebrown.net"
-database_id = "6c21fae9-2f6e-4a21-8661-249979f72052"
+[[migrations]]
+tag = "<v1>"
+new_sqlite_classes = ["MyDurableObject"] 
+
+[[migrations]]
+tag = "v3"
+new_sqlite_classes = ["DurableDatabase"]
+
+[[migrations]]
+tag = "removeMyDurableObject"
+deleted_classes = ["MyDurableObject"] 

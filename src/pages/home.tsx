@@ -1,46 +1,25 @@
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
-import { drizzle } from "drizzle-orm/d1";
 import { Post, posts } from "../db/schema";
 import { render } from "../renderer";
-import { desc, isNotNull } from "drizzle-orm";
-import { like } from "drizzle-orm";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
+  const showCount = 10;
+
+  const id: DurableObjectId = ctx.env.DurableDatabase.idFromName("default");
+  const stub = ctx.env.DurableDatabase.get(id);
+
   const tag = ctx.req.query("tag");
-  const db = drizzle(ctx.env.DB);
-  const showCount = 5;
-
-  let tagsQuery = (await db
-    .selectDistinct({ tags: posts.tags })
-    .from(posts)
-    .where(isNotNull(posts.tags))
-    .all()) as { tags: string }[];
-  let tags = tagsQuery.map((tag) => tag.tags);
-  // comma separate each tag in the tags column
-  const allTags = tags.map((tag) => tag.replaceAll(" ", "").split(","));
-  // flatten the array
-  tags = allTags.flat();
-  // remove duplicates
-  tags = [...new Set(tags)];
-  // Remove the empty tag, in case it made its way in
-  tags = tags.filter((t) => t !== "");
-  // remove the tag we are currently filtering by
+  let tags: string[] = await stub.tags();
   tags = tags.filter((t) => t !== tag);
-  // add the tag to remove the filter
 
-  let postList: Post[];
+  let postList: (typeof posts.$inferSelect)[];
 
   if (tag === undefined) {
-    postList = await db.select().from(posts).orderBy(desc(posts.date)).all();
+    postList = await stub.list();
   } else {
-    postList = await db
-      .select()
-      .from(posts)
-      .where(like(posts.tags, `%${tag}%`))
-      .orderBy(desc(posts.date))
-      .all();
+    postList = await stub.listWithTag(tag);
   }
 
   return (

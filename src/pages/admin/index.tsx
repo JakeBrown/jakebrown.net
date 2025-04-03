@@ -1,17 +1,11 @@
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
-import { drizzle } from "drizzle-orm/d1";
-import { posts } from "#src//db/schema";
-import { desc } from "drizzle-orm";
+import DurableDatabase from "../../db";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
-  const db = drizzle(ctx.env.DB);
-  const postList = await db
-    .select()
-    .from(posts)
-    .orderBy(desc(posts.date))
-    .all();
+  const stub = DurableDatabase.getDefault(ctx.env);
+  const postList = await stub.list();
   return (
     <div
       class={css`

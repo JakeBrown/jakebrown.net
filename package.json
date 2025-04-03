@@ -14,15 +14,13 @@
     "drizzle-orm": "^0.41.0",
     "hono": "^4.6.15",
     "markdown-it": "^14.1.0",
-    "micromark": "^4.0.2",
-    "micromark-extension-frontmatter": "^2.0.0"
+    "highlight.js": "^11.11.1",
+    "highlight.svelte": "^0.1.2"
   },
   "devDependencies": {
+    "drizzle-kit": "^0.30.6",
     "@cloudflare/workers-types": "^4.20241218.0",
-    "@shikijs/markdown-it": "^3.2.1",
     "@types/markdown-it": "^14.1.2",
-    "highlight.js": "^11.11.1",
-    "highlight.svelte": "^0.1.2",
     "wrangler": "^3.96.0"
   }
 }

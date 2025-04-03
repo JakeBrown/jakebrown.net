@@ -11,9 +11,9 @@ import AdminPage from "./pages/admin/index";
 import EditPost from "./pages/admin/edit";
 import NewPost from "./pages/admin/new";
 import { posts } from "./db/schema";
-import { drizzle } from "drizzle-orm/d1";
-import { eq } from "drizzle-orm";
-import { takeUniqueOrThrow } from "./db";
+import DurableDatabase from "./db";
+
+export { DurableDatabase };
 
 type Variables = {
   name: ComponentClass;
@@ -71,14 +71,9 @@ app.get("/blog/:slug/:filename", async (c) => {
 
 app.get("/blog/:slug/", async (c) => {
   const slug = c.req.param("slug");
-  console.log("loading post", slug);
-  const db = drizzle(c.env.DB);
-  const post = await db
-    .select()
-    .from(posts)
-    .where(eq(posts.slug, slug))
-    .then(takeUniqueOrThrow);
-  if (post.status == "draft") {
+  const stub = DurableDatabase.getDefault(c.env);
+  const post = await stub.get(slug);
+  if (post.status === "draft") {
     console.log("this is draft");
     return c.text("Not published", 404);
   }
@@ -128,8 +123,8 @@ async function parsePost(r: HonoRequest): Promise<typeof posts.$inferInsert> {
 app.post("/admin/hx-posts", async (c) => {
   try {
     const post = await parsePost(c.req);
-    const db = drizzle(c.env.DB);
-    await db.insert(posts).values(post).execute();
+    const stub = DurableDatabase.getDefault(c.env);
+    await stub.insert(post);
     const res = c.text(`Post created: ${post.slug}`, 201);
     res.headers.set("hx-redirect", "/admin");
     return res;
@@ -141,19 +136,10 @@ app.post("/admin/hx-posts", async (c) => {
 
 app.put("/admin/hx-posts", async (c) => {
   try {
+    const stub = DurableDatabase.getDefault(c.env);
     const updatedPost = await parsePost(c.req);
-    const db = drizzle(c.env.DB);
-    const existingPost = await db
-      .select()
-      .from(posts)
-      .where(eq(posts.slug, updatedPost.slug))
-      .then(takeUniqueOrThrow);
-    await db
-      .update(posts)
-      .set(updatedPost)
-      .where(eq(posts.slug, existingPost.slug))
-      .execute();
-    const res = c.text(`Post updated: ${existingPost.slug}`, 201);
+    await stub.update(updatedPost);
+    const res = c.text(`Post updated: ${updatedPost.slug}`, 201);
     res.headers.set("hx-redirect", "/admin");
     return res;
   } catch (e: any) {

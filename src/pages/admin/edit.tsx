@@ -1,20 +1,12 @@
-import { drizzle } from "drizzle-orm/d1";
 import { css } from "hono/css";
 import { useRequestContext } from "hono/jsx-renderer";
-import { takeUniqueOrThrow } from "../../db";
-import { posts } from "../../db/schema";
-import { eq } from "drizzle-orm";
+import DurableDatabase from "../../db";
 
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
+  const stub = DurableDatabase.getDefault(ctx.env);
   const slug = ctx.req.param("slug");
-  console.log("loading post", slug);
-  const db = drizzle(ctx.env.DB);
-  const post = await db
-    .select()
-    .from(posts)
-    .where(eq(posts.slug, slug))
-    .then(takeUniqueOrThrow);
+  const post = await stub.get(slug);
 
   return (
     <div>
