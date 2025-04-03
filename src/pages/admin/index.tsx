@@ -5,7 +5,7 @@ import DurableDatabase from "../../db";
 export default async function Page() {
   const ctx = useRequestContext<{ Bindings: Env }>();
   const stub = DurableDatabase.getDefault(ctx.env);
-  const postList = await stub.list();
+  const postList = await stub.list(true);
   return (
     <div
       class={css`

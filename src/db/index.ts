@@ -44,8 +44,17 @@ export default class DurableDatabase extends DurableObject {
       .execute();
   }
 
-  async list() {
-    return this.db.select().from(posts).orderBy(desc(posts.date)).all();
+  async list(showAll: boolean = false) {
+    if (showAll) {
+      return this.db.select().from(posts).orderBy(desc(posts.date)).all();
+    } else {
+      return this.db
+        .select()
+        .from(posts)
+        .where(eq(posts.status, "published"))
+        .orderBy(desc(posts.date))
+        .all();
+    }
   }
 
   async listWithTag(tag: string) {
