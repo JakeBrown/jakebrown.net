@@ -18,9 +18,9 @@
 }
 
 html {
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--black);
   font-size: 18px;
+  font-family: roboto;
 }
 body {
   margin: 0px !important;
@@ -84,8 +84,8 @@ h1 {
   margin-top: 2rem;
   font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 700;
   text-transform: uppercase;
+  font-family: oswald-dark;
   color: var(--burnt-orange);
 
   @media (max-width: 768px) {
@@ -100,7 +100,7 @@ h2 {
   margin-top: 2rem;
   font-size: 2rem;
   line-height: 2rem;
-  font-weight: 700;
+  font-family: oswald-dark;
   text-transform: uppercase;
   color: var(--night-sky);
 
@@ -227,4 +227,28 @@ code.hljs {
   font-size: 1em;
   line-height: 1.5em;
   white-space: pre;
+}
+
+@font-face {
+  font-family: oswald;
+  src: url(/static/font/oswald-latin-300-normal.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: oswald-dark;
+  src: url(/static/font/oswald-latin-500-normal.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: fira;
+  src: url(/static/font/FiraCode-Medium.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(/static/font/roboto-flex-latin-400-normal.woff2);
+  font-display: swap;
 }

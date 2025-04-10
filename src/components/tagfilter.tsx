@@ -48,6 +48,7 @@ export default async function TagFilter({
           justify-content: center;
           align-items: center;
           cursor: pointer;
+          text-decoration: none;
           font-size: 18px;
           font-weight: bold;
           border: none;
@@ -60,6 +61,7 @@ export default async function TagFilter({
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
+          font-family: oswald-dark;
         }
 
         .othertag {
@@ -69,6 +71,7 @@ export default async function TagFilter({
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
+          font-family: oswald-dark;
         }
 
         @media (max-width: 768px) {

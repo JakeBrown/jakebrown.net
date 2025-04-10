@@ -7,6 +7,8 @@ function MoreLink({ slug }: { slug: string }) {
     <a
       class={css`
         background-color: var(--night-sky);
+        font-family: oswald;
+        letter-spacing: 0.05rem;
         color: white;
         padding: 10px;
         border-radius: 5px;
@@ -45,6 +47,7 @@ export default function PostView({
           font-size: 0.75rem;
           color: var(--burnt-orange);
           margin-top: 20px;
+          font-family: oswald-dark;
         }
 
         ul {
@@ -79,6 +82,7 @@ export default function PostView({
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
+          font-family: oswald-dark;
         }
         .othertag {
           background-color: var(--night-sky);
@@ -87,6 +91,7 @@ export default function PostView({
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
+          font-family: oswald-dark;
         }
       `}
     >

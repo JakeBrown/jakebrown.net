@@ -18,7 +18,27 @@ export const base = jsxRenderer(
           <script src="/static/js/htmx-2.0.4.min.js" defer></script>
           <script src="/static/js/preload-2.1.1.min.js" defer></script>
           <script src="/static/js/response-targets-2.0.3.min.js" defer></script>
-          <link href="/static/css/fira.css" rel="stylesheet"></link>
+          <link
+            rel="preload"
+            href="/static/font/roboto-flex-latin-400-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin="anonymous"
+          ></link>
+          <link
+            rel="preload"
+            href="/static/font/oswald-latin-300-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin="anonymous"
+          ></link>
+          <link
+            rel="preload"
+            href="/static/font/oswald-latin-500-normal.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin="anonymous"
+          ></link>
           <Style />
         </head>
         <body hx-ext="preload,response-targets">

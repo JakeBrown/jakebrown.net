@@ -1,5 +1,6 @@
 import m1 from "./0001_posts.sql";
 import m2 from "./0002_tags.sql";
+import m3 from "./0003_attachments.sql";
 
 const migrationsList = [
   {
@@ -9,6 +10,10 @@ const migrationsList = [
   {
     name: "0002_tags",
     sql: m2,
+  },
+  {
+    name: "0003_attachments",
+    sql: m3,
   },
 ];
 

@@ -22,24 +22,27 @@ function NavLink({
           padding-right: 1rem;
           margin-right: 1rem;
           border-radius: 0.375rem;
-          font-size: 1.125rem;
+          font-size: 1.35rem;
           line-height: 1.75rem;
           transition-property: color, background-color, border-color,
             text-decoration-color, fill, stroke;
           transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
           transition-duration: 300ms;
           text-decoration: none;
-          color: white;
+          letter-spacing: 0.1rem;
+          font-weight: 100;
+          font-family: oswald;
+          color: var(--wheat);
         `,
         currentPath === href
           ? css`
               background-color: var(--black);
-              color: var(--wheat);
+              font-family: oswald-dark;
+              margin-right: 0.9rem;
             `
           : css`
               &:hover {
                 background-color: var(--lightblack);
-                color: white;
               }
             `
       )}
@@ -58,7 +61,6 @@ export default function Nav() {
         display: flex;
         padding: 1rem;
         background-color: var(--night-sky);
-        font-family: "Fira Code";
         @media (max-width: 768px) {
           padding: 0.5rem;
         }
@@ -72,26 +74,29 @@ export default function Nav() {
       </NavLink>
       <a
         href="/"
+        id="homelink"
         class={css`
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
           padding-left: 1rem;
           border-left: 1px solid var(--wheat);
           padding-right: 1rem;
           margin-right: 1rem;
-          font-size: 1.25rem;
-          font-weight: 900;
-          line-height: 1.75rem;
-          color: var(--wheat);
           text-decoration: none;
-          font-family: "Fira Code";
-          @media (max-width: 768px) {
-            font-weight: 300;
-            margin-right: 0rem;
-          }
+          display: flex;
+          align-items: center;
         `}
       >
-        Jake Brown
+        <img
+          src="/static/img/logo.png"
+          alt="Jake Brown"
+          class={css`
+            color: white;
+            height: 40px;
+            align-self: center;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            filter: invert(1);
+          `}
+        />
       </a>
 
       <a
