@@ -22,37 +22,31 @@ export default async function Page() {
 
       <h2>Cloudflare</h2>
       <p>
-        I'm currently exploring what full-stack application development looks
-        like on Cloudflare, in the most platform-native way. No build step, no
-        server, no external database. Just a worker script running on the edge
-        and utilising using Cloudflare services.
+        What does full-stack application development look like on Cloudflare, in
+        the most platform-native way? No build step, no server, no external
+        database. Just a worker script running on the edge and utilising using
+        Cloudflare services.
       </p>
       <p>
-        It's different to building on anything else. I've often thought of it
+        Very different to building on anything else. I've often thought of it
         like this: in the traditional cloud model, big fat pipes connect large
         data centers to each other and to the end users. Servers running in
         those data centers do the compute. But with Cloudflare, there are no
         servers (in this abstraction), and the compute happens inside the pipes.
       </p>
-      <div class="quote">
-        <p>
-          <q>
-            With the addition of Workers KV, Cloudflare Workers moves closer to
-            being a complete{" "}
-            <mark>compute platform embedded inside the Internet</mark>.
-          </q>
-        </p>
-        <p>
-          <a href="https://blog.cloudflare.com/introducing-workers-kv/">
-            Introducing Workers KV (2018)
-          </a>
-        </p>
+      <blockquote>
+        With the addition of Workers KV, Cloudflare Workers moves closer to
+        being a complete{" "}
+        <mark>compute platform embedded inside the Internet</mark>. -{" "}
+        <a href="https://blog.cloudflare.com/introducing-workers-kv/">
+          Introducing Workers KV (2018)
+        </a>
+      </blockquote>
 
-        <p>
-          You can find the source for this site on GitHub. It is built using
-          Hono, and deployed to Cloudflare Workers.
-        </p>
-      </div>
+      <p>
+        You can find the source for this site on GitHub. It is built using Hono,
+        and deployed to Cloudflare Workers.
+      </p>
       <h2>Consulting</h2>
       <p>
         After moving on from EyeSpace, I'm now consulting as a Solutions

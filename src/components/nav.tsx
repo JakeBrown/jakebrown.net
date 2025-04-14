@@ -22,7 +22,7 @@ function NavLink({
           padding-right: 1rem;
           margin-right: 1rem;
           border-radius: 0.375rem;
-          font-size: 1.35rem;
+          font-size: 1.5rem;
           line-height: 1.75rem;
           transition-property: color, background-color, border-color,
             text-decoration-color, fill, stroke;
@@ -31,14 +31,21 @@ function NavLink({
           text-decoration: none;
           letter-spacing: 0.1rem;
           font-weight: 100;
-          font-family: oswald;
+          font-family: oswald-dark;
           color: var(--wheat);
+          position: relative;
+          -webkit-mask-image: url("/static/img/grit.png");
+          mask-image: url("/static/img/grit.png");
+
+          @media (max-width: 768px) {
+            margin-right: 0.5rem;
+            padding-left: 0.7rem;
+            padding-right: 0.7rem;
+          }
         `,
         currentPath === href
           ? css`
               background-color: var(--black);
-              font-family: oswald-dark;
-              margin-right: 0.9rem;
             `
           : css`
               &:hover {
@@ -69,8 +76,8 @@ export default function Nav() {
       <NavLink href="/now" currentPath={currentPath}>
         Now
       </NavLink>
-      <NavLink href="/past" currentPath={currentPath}>
-        Past
+      <NavLink href="/before" currentPath={currentPath}>
+        Before
       </NavLink>
       <a
         href="/"
@@ -83,18 +90,22 @@ export default function Nav() {
           text-decoration: none;
           display: flex;
           align-items: center;
+
+          @media (max-width: 768px) {
+            margin-left: auto;
+          }
         `}
       >
         <img
-          src="/static/img/logo.png"
+          src="/static/img/logo_2.png"
           alt="Jake Brown"
           class={css`
-            color: white;
             height: 40px;
             align-self: center;
             padding-bottom: 0px;
             margin-bottom: 0px;
-            filter: invert(1);
+            -webkit-mask-image: url("/static/img/grit.png");
+            mask-image: url("/static/img/grit.png");
           `}
         />
       </a>

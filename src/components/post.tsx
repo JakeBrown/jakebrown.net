@@ -36,6 +36,7 @@ export default function PostView({
     <div
       class={css`
         padding-bottom: 30px;
+        margin-top: 2rem;
         h1 {
           margin-top: 0px;
           a {
@@ -68,30 +69,20 @@ export default function PostView({
           display: block;
           border: 1px solid black;
         }
-        blockquote {
-          border-left: 5px solid var(--burnt-orange);
-          padding-left: 10px;
-          padding-top: 5px;
-          padding-bottom: 5px;
-          margin-left: 0px;
-        }
         .tag {
           background-color: var(--burnt-orange);
-          color: white;
+          color: var(--white);
           padding: 5px;
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
           font-family: oswald-dark;
-        }
-        .othertag {
-          background-color: var(--night-sky);
-          color: white;
-          padding: 5px;
-          border-radius: 5px;
-          margin-right: 5px;
-          text-decoration: none;
-          font-family: oswald-dark;
+          -webkit-mask-image: url("/static/img/grit.png");
+          mask-image: url("/static/img/grit.png");
+          &:hover {
+            border: 1px solid var(--burnt-orange);
+            margin-left: -1px;
+          }
         }
       `}
     >

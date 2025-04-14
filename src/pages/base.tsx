@@ -13,7 +13,11 @@ export const base = jsxRenderer(
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
+          <link href="/static/img/logo_2.png" rel="preload" as="image"/>
+          <link href="/static/img/grit.png" rel="preload" as="image"/>
+          <link href="/static/css/style.css" rel="preload" as="style"/>
           <link href="/static/css/style.css" rel="stylesheet" />
+
           <link rel="stylesheet" href="/static/css/night-owl.min.css"></link>
           <script src="/static/js/htmx-2.0.4.min.js" defer></script>
           <script src="/static/js/preload-2.1.1.min.js" defer></script>

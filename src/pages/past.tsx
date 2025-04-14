@@ -3,7 +3,7 @@ import { css } from "hono/css";
 export default async function Page() {
   return (
     <div class="main mx-auto">
-      <h1>Past Projects</h1>
+      <h1>Before Now</h1>
       <p>
         I've been developing software professionally for 15+ years. Here is how
         I've spent the bulk of my time.
@@ -28,10 +28,9 @@ export default async function Page() {
         EyeSpace<sup>&reg;</sup>
       </h2>
       <p>
-        In 2012 I co-founded medical device manufacturing company EyeSpace
-        <sup>&reg;</sup>, creating software to design and manufacture contact
-        lenses with state-of-the-art numerical simulation and manufacturing
-        techniques.
+        In 2012 I co-founded medical device manufacturing company EyeSpace,
+        creating software to design and manufacture contact lenses with
+        state-of-the-art numerical simulation and manufacturing techniques.
       </p>
       <p>
         As Managing Director and then Chief Technology Officer, I grew the
@@ -70,25 +69,33 @@ export default async function Page() {
           display: flex;
           flex-direction: row;
           justify-content: center;
+          @media (max-width: 768px) {
+            flex-direction: column;
+          }
+          img {
+            height: 300px;
+            align-self: center;
+            box-shadow: 1px 1px 5px grey;
+            max-width: 80%;
+            @media (max-width: 768px) {
+              height: auto;
+            }
+          }
         `}
       >
         <img
-          class={css`
-            height: 300px;
-            align-self: center;
-            box-shadow: 1px 1px 5px grey;
-          `}
+          class={css``}
           src="/static/img/contact-lenses-textbook.jpg"
-          alt="Truck"
+          alt="textbook"
         />
         <img
           class={css`
-            height: 300px;
-            align-self: center;
-            box-shadow: 1px 1px 5px grey;
+            @media (max-width: 768px) {
+              margin-top: 20px;
+            }
           `}
           src="/static/img/textbook-app.jpg"
-          alt="Truck"
+          alt="app"
         />
       </div>
       <h2>AI, Machine Learning, and Evolutionary Computing</h2>

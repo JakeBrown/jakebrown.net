@@ -15,16 +15,12 @@ export default async function TagFilter({
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 30px;
+        background-color: var(--white);
+
         h1 {
           margin-top: 0px;
           display: flex; /* Use flexbox for alignment */
           align-items: center; /* Vertically center content */
-          .tag {
-            font-size: 0.5em;
-            line-height: 1; /* Vertically center content */
-            padding: 8px;
-            margin-left: 10px;
-          }
 
           @media (max-width: 768px) {
             line-height: 1;
@@ -43,7 +39,7 @@ export default async function TagFilter({
           line-height: 1;
           border-radius: 5px;
           background-color: var(--night-sky);
-          color: white;
+          color: var(--white);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -56,22 +52,41 @@ export default async function TagFilter({
 
         .tag {
           background-color: var(--burnt-orange);
-          color: white;
+          color: var(--white);
           padding: 5px;
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
           font-family: oswald-dark;
+
+          font-size: 0.5em;
+          line-height: 1; /* Vertically center content */
+          padding: 8px;
+          margin-left: 10px;
+
+          -webkit-mask-image: url("/static/img/grit.png");
+          mask-image: url("/static/img/grit.png");
+        }
+
+        a {
+          text-decoration: none;
         }
 
         .othertag {
           background-color: var(--night-sky);
-          color: white;
+          color: var(--white);
           padding: 5px;
           border-radius: 5px;
           margin-right: 5px;
           text-decoration: none;
           font-family: oswald-dark;
+          -webkit-mask-image: url("/static/img/grit.png");
+          mask-image: url("/static/img/grit.png");
+          &:hover {
+            border: 1px solid var(--night-sky);
+            margin-right: 4px;
+            margin-left: -1px;
+          }
         }
 
         @media (max-width: 768px) {

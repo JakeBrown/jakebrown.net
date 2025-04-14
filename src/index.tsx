@@ -46,7 +46,7 @@ app.get("/now", async (c) => {
   return c.render(<NowPage />);
 });
 
-app.get("/past", async (c) => {
+app.get("/before", async (c) => {
   return c.render(<PastPage />);
 });
 
