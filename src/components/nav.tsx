@@ -12,7 +12,6 @@ function NavLink({
 }) {
   return (
     <a
-      preload="mouseover"
       href={href}
       class={cx(
         css`
