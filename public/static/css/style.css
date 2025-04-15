@@ -2,7 +2,8 @@
   --blue: #007aff; /* Modern vibrant blue */
   --white: #f5f5f5; /* Soft white for better contrast */
 
-  --burnt-orange: rgb(179, 74, 34); /* Rich, warm orange */
+  --burnt-orange: hsl(14, 68%, 42%);
+  --burnt-orange-dark: hsl(14, 68%, 32%); /* Rich, warm orange */
   --black: #121212; /* Deep black for dark themes */
   --lightblack: #333; /* Lighter black for text */
   --grey: #6c757d; /* Muted grey for text */
@@ -16,6 +17,13 @@
 
   --text-lg: 1.125rem;
   --text-lg--line-height: calc(1.75 / 1.125);
+}
+
+.grunge {
+          mask-image: url("/static/img/turb.svg"),
+          linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.80));
+          mask-composite: add;
+          mask-size: 100%;
 }
 
 html {

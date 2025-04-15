@@ -63,9 +63,6 @@ export default async function TagFilter({
           line-height: 1; /* Vertically center content */
           padding: 8px;
           margin-left: 10px;
-
-          -webkit-mask-image: url("/static/img/grit.png");
-          mask-image: url("/static/img/grit.png");
         }
 
         a {
@@ -80,8 +77,6 @@ export default async function TagFilter({
           margin-right: 5px;
           text-decoration: none;
           font-family: oswald-dark;
-          -webkit-mask-image: url("/static/img/grit.png");
-          mask-image: url("/static/img/grit.png");
           &:hover {
             border: 1px solid var(--night-sky);
             margin-right: 4px;
@@ -100,7 +95,7 @@ export default async function TagFilter({
         &times;
       </a>
       <h1>
-        Showing: <span class="tag">{tag}</span>
+        Showing: <span class="tag grunge">{tag}</span>
       </h1>
       <div
         class={css`
@@ -109,7 +104,7 @@ export default async function TagFilter({
       >
         {tags.map((tag) => (
           <a href={`/?tag=${tag}`}>
-            <span class="othertag">{tag}</span>
+            <span class="othertag grunge">{tag}</span>
           </a>
         ))}
       </div>

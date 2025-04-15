@@ -77,8 +77,6 @@ export default function PostView({
           margin-right: 5px;
           text-decoration: none;
           font-family: oswald-dark;
-          -webkit-mask-image: url("/static/img/grit.png");
-          mask-image: url("/static/img/grit.png");
           &:hover {
             border: 1px solid var(--burnt-orange);
             margin-left: -1px;
@@ -109,7 +107,7 @@ export default function PostView({
             .split(",")
             .map((tag) => (
               <a href={`/?tag=${tag}`}>
-                <span class="tag">{tag}</span>
+                <span class="tag grunge">{tag}</span>
               </a>
             ))}
       </div>
