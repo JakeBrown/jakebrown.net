@@ -13,14 +13,16 @@ export const base = jsxRenderer(
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <link href="/static/img/logo_2.png" rel="preload" as="image"/>
-          <link href="/static/img/grit.png" rel="preload" as="image"/>
-          <link href="/static/css/style.css" rel="preload" as="style"/>
+          <link href="/static/img/logo_2.png" rel="preload" as="image" />
+          <link href="/static/img/grit.png" rel="preload" as="image" />
+          <link href="/static/css/style.css" rel="preload" as="style" />
           <link href="/static/css/style.css" rel="stylesheet" />
+          <link rel="prefetch" href="/" as="document" />
+          <link rel="prefetch" href="/now" as="document" />
+          <link rel="prefetch" href="/before" as="document" />
 
           <link rel="stylesheet" href="/static/css/night-owl.min.css"></link>
           <script src="/static/js/htmx-2.0.4.min.js" defer></script>
-          <script src="/static/js/preload-2.1.1.min.js" defer></script>
           <script src="/static/js/response-targets-2.0.3.min.js" defer></script>
           <link
             rel="preload"
@@ -45,7 +47,7 @@ export const base = jsxRenderer(
           ></link>
           <Style />
         </head>
-        <body hx-ext="preload,response-targets">
+        <body hx-ext="response-targets">
           <Nav />
           <main>
             <Suspense fallback={<Loading />}>{children}</Suspense>
