@@ -33,9 +33,6 @@ function NavLink({
           font-family: oswald-dark;
           color: var(--wheat);
           position: relative;
-          -webkit-mask-image: url("/static/img/grit.png");
-          mask-image: url("/static/img/grit.png");
-
           @media (max-width: 768px) {
             margin-right: 0.5rem;
             padding-left: 0.7rem;
@@ -50,7 +47,8 @@ function NavLink({
               &:hover {
                 background-color: var(--lightblack);
               }
-            `
+            `,
+        "grunge"
       )}
     >
       {children}
@@ -103,8 +101,11 @@ export default function Nav() {
             align-self: center;
             padding-bottom: 0px;
             margin-bottom: 0px;
-            -webkit-mask-image: url("/static/img/grit.png");
-            mask-image: url("/static/img/grit.png");
+            filter: contrast(120%) saturate(120%);
+            mask-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),
+              url("/static/img/logoturb.svg");
+            mask-composite: subtract;
+            mask-size: 100%;
           `}
         />
       </a>

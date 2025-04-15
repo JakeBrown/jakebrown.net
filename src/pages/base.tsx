@@ -14,7 +14,8 @@ export const base = jsxRenderer(
             content="width=device-width, initial-scale=1.0"
           />
           <link href="/static/img/logo_2.png" rel="preload" as="image" />
-          <link href="/static/img/grit.png" rel="preload" as="image" />
+          <link href="/static/img/turb.svg" rel="preload" as="image" />
+          <link href="/static/img/logoturb.svg" rel="preload" as="image" />
           <link href="/static/css/style.css" rel="preload" as="style" />
           <link href="/static/css/style.css" rel="stylesheet" />
           <link rel="prefetch" href="/" as="document" />
