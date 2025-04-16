@@ -93,6 +93,25 @@ app.get("/admin/new", async (c) => {
   return c.render(<NewPost />);
 });
 
+app.post("/blog/:slug/upload", async (c) => {
+  const slug = c.req.param("slug");
+  const body = await c.req.parseBody();
+  const file = body["file"] as File;
+
+  // Check file name contains only letters, numbers, underscores, and full stops.
+  const regex = /^[a-zA-Z0-9-_.]+$/;
+  if (!regex.test(file.name)) {
+    return c.text("Invalid file name", 400);
+  }
+
+  const arrayBuffer = await file.arrayBuffer();
+  await c.env.jakebrown_blog.put(
+    `${slug}/${file.name}`,
+    new Uint8Array(arrayBuffer)
+  );
+  return c.text("OK", 200);
+});
+
 async function parsePost(r: HonoRequest): Promise<typeof posts.$inferInsert> {
   const parsedBody = await r.parseBody();
   console.log(parsedBody);
