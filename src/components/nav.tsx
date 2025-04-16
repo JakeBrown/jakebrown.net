@@ -96,12 +96,15 @@ export default function Nav() {
         <img
           src="/static/img/logo_2.png"
           alt="Jake Brown"
-          class={cx(css`
-            height: 40px;
-            align-self: center;
-            padding-bottom: 0px;
-            margin-bottom: 0px;
-          `, 'grunge-heavy')}
+          class={cx(
+            css`
+              height: 40px;
+              align-self: center;
+              padding-bottom: 0px;
+              margin-bottom: 0px;
+            `,
+            "grunge-heavy"
+          )}
         />
       </a>
 
