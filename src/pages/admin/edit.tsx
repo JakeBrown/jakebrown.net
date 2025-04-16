@@ -63,7 +63,7 @@ export default async function Page() {
         <form
           id="form"
           hx-encoding="multipart/form-data"
-          hx-post={`/blog/${slug}/upload`}
+          hx-post={`/admin/blog/${slug}/upload`}
         >
           <input type="file" name="file" />
           <button>Upload</button>

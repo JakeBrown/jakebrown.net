@@ -93,7 +93,7 @@ app.get("/admin/new", async (c) => {
   return c.render(<NewPost />);
 });
 
-app.post("/blog/:slug/upload", async (c) => {
+app.post("/admin/blog/:slug/upload", async (c) => {
   const slug = c.req.param("slug");
   const body = await c.req.parseBody();
   const file = body["file"] as File;
