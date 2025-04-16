@@ -70,11 +70,11 @@ export default function Nav() {
         }
       `}
     >
-      <NavLink href="/now" currentPath={currentPath}>
-        Now
-      </NavLink>
       <NavLink href="/before" currentPath={currentPath}>
         Before
+      </NavLink>
+      <NavLink href="/now" currentPath={currentPath}>
+        Now
       </NavLink>
       <a
         href="/"
@@ -96,17 +96,12 @@ export default function Nav() {
         <img
           src="/static/img/logo_2.png"
           alt="Jake Brown"
-          class={css`
+          class={cx(css`
             height: 40px;
             align-self: center;
             padding-bottom: 0px;
             margin-bottom: 0px;
-            filter: contrast(120%) saturate(120%);
-            mask-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),
-              url("/static/img/logoturb.svg");
-            mask-composite: subtract;
-            mask-size: 100%;
-          `}
+          `, 'grunge-heavy')}
         />
       </a>
 

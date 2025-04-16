@@ -3,12 +3,12 @@ import { css } from "hono/css";
 export default async function Page() {
   return (
     <div class="main mx-auto">
-      <h1>Before Now</h1>
+      <h1 class="grunge">Before Now</h1>
       <p>
         I've been developing software professionally for 15+ years. Here is how
         I've spent the bulk of my time.
       </p>
-      <h2>Academic Research</h2>
+      <h2 class="grunge">Academic Research</h2>
       <p>
         In 2012 I completed my studies in{" "}
         <a href="https://calendar.adelaide.edu.au/aprcw/2024/hschp_hschp">
@@ -24,7 +24,7 @@ export default async function Page() {
         continued to work on Machine Learning research projects, and guest
         lectured to postgrad students on the topic of Software Architecture.
       </p>
-      <h2>
+      <h2 class="grunge">
         EyeSpace<sup>&reg;</sup>
       </h2>
       <p>
@@ -98,7 +98,7 @@ export default async function Page() {
           alt="app"
         />
       </div>
-      <h2>AI, Machine Learning, and Evolutionary Computing</h2>
+      <h2 class="grunge">AI, Machine Learning, and Evolutionary Computing</h2>
       <p>
         The large and interesting data-sets we were working with at EyeSpace
         <sup>&reg;</sup> led me to explore modern computing techniques for both

@@ -19,9 +19,24 @@
   --text-lg--line-height: calc(1.75 / 1.125);
 }
 
-.grunge {
-  filter: contrast(120%);
-  mask-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),
+h1, h2, .grunge {
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0.9), 
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.9)
+    ),
+    url("/static/img/turb.svg");
+
+  mask-composite: subtract;
+  mask-size: 100%;
+}
+
+.grunge-heavy {
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0.9), 
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.5)
+    ),
     url("/static/img/turb.svg");
 
   mask-composite: subtract;
