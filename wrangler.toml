@@ -1,41 +1,24 @@
 name = "jakebrown"
-compatibility_date = "2025-01-03"
+main = "./dist/_worker.js"
+compatibility_date = "2025-05-29"
 compatibility_flags = [ "nodejs_compat" ]
-main = "src/index.tsx"
-
-routes = [
-  { pattern = "www.jakebrown.net", custom_domain = true }
-]
-
-[[rules]] 
-type = "Text"
-globs = ["**/*.sql"]
-fallthrough = true
-
-[[durable_objects.bindings]]
-name = "DurableDatabase"
-class_name = "DurableDatabase"
 
 [assets]
-directory = "public"
+directory = "./dist"
 binding = "ASSETS"
 
-[[r2_buckets]]
-bucket_name = "jakebrown-blog"
-preview_bucket_name = "jakebrown-blog"
-binding = "jakebrown_blog"
+[[kv_namespaces]]
+binding = "SESSION"
+id = "245892257160427483f8c5ac3837c822"
+
+[[kv_namespaces]]
+binding = "CACHE" 
+id = "b477a170064c4c398572ab5a09dd2424"
+
+[[migrations]]
+tag = "remove"
+deleted_classes = ["DurableDatabase"]
+
 
 [observability]
 enabled = true
-
-[[migrations]]
-tag = "<v1>"
-new_sqlite_classes = ["MyDurableObject"] 
-
-[[migrations]]
-tag = "v3"
-new_sqlite_classes = ["DurableDatabase"]
-
-[[migrations]]
-tag = "removeMyDurableObject"
-deleted_classes = ["MyDurableObject"] 

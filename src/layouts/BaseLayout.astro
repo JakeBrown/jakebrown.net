@@ -1,0 +1,324 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Jake Brown', description = 'Jake Brown - Software Engineer' } = Astro.props;
+
+// Get current page for navigation highlighting
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/static/css/style.css" as="style">
+  <link rel="preload" href="/static/font/oswald-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/font/oswald-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/font/roboto-flex-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/static/img/logo_2.png" as="image">
+  <link rel="preload" href="/static/img/turb.svg" as="image">
+  
+  <!-- Critical inline styles to prevent FOUC -->
+  <style>
+    /* Critical styles for immediate rendering */
+    :root {
+      --night-sky: rgb(28, 42, 75);
+      --wheat: rgb(230, 230, 200);
+      --black: #121212;
+      --lightblack: #333;
+      --white: #f5f5f5;
+      --burnt-orange: hsl(14, 68%, 42%);
+    }
+    
+    @font-face {
+      font-family: oswald-dark;
+      src: url(/static/font/oswald-latin-500-normal.woff2);
+      font-display: block; /* Block rendering until font loads */
+    }
+    
+    @font-face {
+      font-family: roboto;
+      src: url(/static/font/roboto-flex-latin-400-normal.woff2);
+      font-display: block;
+    }
+    
+    html {
+      color: var(--black);
+      font-size: 17px;
+      font-family: roboto, system-ui, sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    nav {
+      display: flex;
+      padding: 1rem;
+      background-color: var(--night-sky);
+      align-items: center;
+    }
+    
+    nav a:not(#homelink):not(.github-link) {
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      border-radius: 0.375rem;
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+      text-decoration: none;
+      letter-spacing: 0.1rem;
+      font-weight: 100;
+      font-family: oswald-dark, system-ui, sans-serif;
+      color: var(--wheat);
+    }
+    
+    nav a[aria-current="page"]:not(#homelink) {
+      background-color: var(--black);
+    }
+    
+    #homelink {
+      padding-left: 1rem;
+      border-left: 1px solid var(--wheat);
+      padding-right: 1rem;
+      margin-right: 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    #homelink img {
+      height: 40px;
+    }
+    
+    .github-link {
+      margin-left: auto;
+    }
+    
+    .github-link img {
+      height: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    
+    main {
+      padding-bottom: 50px;
+    }
+    
+    /* CSS View Transitions */
+    @view-transition {
+      navigation: auto;
+    }
+    
+    /* Persist navigation during transitions */
+    nav {
+      view-transition-name: main-nav;
+    }
+    
+    #homelink img {
+      view-transition-name: logo;
+    }
+    
+    /* Smooth fade for main content */
+    main {
+      view-transition-name: main-content;
+    }
+    
+    ::view-transition-old(main-content) {
+      animation: fade-out 0.2s ease-out;
+    }
+    
+    ::view-transition-new(main-content) {
+      animation: fade-in 0.2s ease-out;
+    }
+    
+    @keyframes fade-out {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Prevent nav from animating */
+    ::view-transition-old(main-nav),
+    ::view-transition-new(main-nav) {
+      animation: none;
+    }
+    
+    ::view-transition-old(logo),
+    ::view-transition-new(logo) {
+      animation: none;
+    }
+    
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.5rem;
+      }
+      nav a:not(#homelink):not(.github-link) {
+        margin-right: 0.5rem;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+      }
+      #homelink {
+        margin-left: auto;
+      }
+      .github-link {
+        display: none;
+      }
+    }
+  </style>
+  
+  <!-- Load stylesheets with high priority -->
+  <link rel="stylesheet" href="/static/css/style.css" fetchpriority="high">
+  <link rel="stylesheet" href="/static/css/night-owl.min.css" media="print" onload="this.media='all'">
+  
+  <!-- View Transitions for smooth navigation -->
+  <ViewTransitions fallback="none" />
+  
+  <!-- Prefetch pages for instant navigation -->
+  <link rel="prefetch" href="/" as="document">
+  <link rel="prefetch" href="/now" as="document">
+  <link rel="prefetch" href="/past" as="document">
+</head>
+<body>
+  <nav>
+    <a href="/past" aria-current={currentPath === '/past' ? 'page' : undefined}>Before</a>
+    <a href="/now" aria-current={currentPath === '/now' ? 'page' : undefined}>Now</a>
+    <a href="/" id="homelink">
+      <img src="/static/img/logo_2.png" alt="Jake Brown" />
+    </a>
+    <a href="https://github.com/JakeBrown/jakebrown.net" target="_blank" class="github-link">
+      <img src="/static/img/github-mark-white.svg" alt="GitHub Logo" />
+    </a>
+  </nav>
+  
+  <main>
+    <slot />
+  </main>
+</body>
+</html>
+
+<style>
+  /* Original dark theme background */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    min-height: 100vh;
+  }
+  
+  /* Navigation bar with original styling */
+  nav {
+    display: flex;
+    padding: 1rem;
+    background-color: var(--night-sky);
+    align-items: center;
+  }
+  
+  /* Navigation links */
+  nav a:not(#homelink):not(.github-link) {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    border-radius: 0.375rem;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    transition: all 300ms ease;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    font-weight: 100;
+    font-family: oswald-dark;
+    color: var(--wheat);
+    position: relative;
+  }
+  
+  nav a:not(#homelink):not(.github-link):hover {
+    background-color: var(--lightblack);
+  }
+  
+  /* Active page styling */
+  nav a[aria-current="page"]:not(#homelink) {
+    background-color: var(--black);
+  }
+  
+  /* Logo link */
+  #homelink {
+    padding-left: 1rem;
+    border-left: 1px solid var(--wheat);
+    padding-right: 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  #homelink img {
+    height: 40px;
+    align-self: center;
+  }
+  
+  /* Apply grunge effect to logo */
+  #homelink img,
+  nav a:not(#homelink):not(.github-link) {
+    mask-image: linear-gradient(
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url("/static/img/turb.svg");
+    mask-composite: subtract;
+    mask-size: 100%;
+  }
+  
+  /* GitHub link */
+  .github-link {
+    margin-left: auto;
+  }
+  
+  .github-link img {
+    height: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Main content area */
+  main {
+    /* Use the original main styles from style.css */
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      padding: 0.5rem;
+    }
+    
+    nav a:not(#homelink):not(.github-link) {
+      margin-right: 0.5rem;
+      padding-left: 0.7rem;
+      padding-right: 0.7rem;
+    }
+    
+    #homelink {
+      margin-left: auto;
+    }
+    
+    .github-link {
+      display: none;
+    }
+  }
+</style>

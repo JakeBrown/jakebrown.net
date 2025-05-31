@@ -1,0 +1,108 @@
+---
+export const prerender = true; // Static generation for blog posts
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog', ({ data }) => {
+    return data.status === 'published';
+  });
+  
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, date, tags = [] } = entry.data;
+---
+
+<BaseLayout title={`${title} - Jake Brown`}>
+  <article class="blog-post">
+    <h1>{title}</h1>
+    <div class="tags">
+      {tags.map((tag) => (
+        <a href={`/?tag=${tag}`}>
+          <span class="tag grunge">{tag}</span>
+        </a>
+      ))}
+    </div>
+    <div class="date">
+      <span>{date}</span>
+    </div>
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    padding-bottom: 30px;
+    margin-top: 2rem;
+  }
+  
+  .blog-post h1 {
+    margin-top: 0px;
+    color: var(--burnt-orange);
+  }
+  
+  .date {
+    font-size: 0.75rem;
+    color: var(--burnt-orange);
+    margin-top: 20px;
+    font-family: oswald-dark;
+  }
+  
+  .blog-post ul {
+    padding-left: 0;
+  }
+  
+  .blog-post li {
+    margin-left: 0px;
+    text-decoration: none;
+    list-style-type: none;
+  }
+  
+  .blog-post a {
+    text-decoration: none;
+  }
+  
+  .blog-post img {
+    max-width: 50%;
+    margin: auto;
+    display: block;
+    border: 1px solid black;
+  }
+  
+  .tag {
+    background-color: var(--burnt-orange);
+    color: var(--white);
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    font-family: oswald-dark;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  
+  .tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--night-sky);
+  }
+  
+  .tags a {
+    text-decoration: none;
+  }
+  
+  /* Hide the preview separators in full blog posts */
+  .content > hr {
+    display: none;
+  }
+</style>

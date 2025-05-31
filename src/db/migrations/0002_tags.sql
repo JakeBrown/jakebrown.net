@@ -1,2 +1,0 @@
--- Migration number: 0002 	 2025-03-31T01:34:04.933Z
-ALTER TABLE posts ADD COLUMN tags TEXT;

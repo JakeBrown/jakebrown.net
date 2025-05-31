@@ -1,0 +1,396 @@
+---
+// Homepage with server-side tag filtering
+export const prerender = false; // This page needs server-side rendering for URL params
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get published blog posts
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.status === 'published';
+});
+
+// Sort posts by date (newest first)
+const posts = allPosts.sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+
+// Prepare posts with preview content and page break detection
+const postsWithPreviews = await Promise.all(posts.map(async post => {
+  const hasPageBreak = post.body.includes('\n---\n');
+  const { Content } = await post.render();
+  return {
+    ...post,
+    hasPageBreak,
+    Content
+  };
+}));
+
+// Configuration
+const showCount = 10;
+
+// Server-side tag filtering
+const url = new URL(Astro.request.url);
+const selectedTag = url.searchParams.get('tag');
+
+const filteredPosts = selectedTag 
+  ? postsWithPreviews.filter(post => post.data.tags && post.data.tags.includes(selectedTag))
+  : postsWithPreviews;
+
+// Determine which posts to show
+const recentPosts = selectedTag ? filteredPosts : filteredPosts.slice(0, showCount);
+const morePosts = selectedTag ? [] : filteredPosts.slice(showCount);
+
+// Get all available tags for the filter
+const allTags = [...new Set(postsWithPreviews.flatMap(post => post.data.tags || []))];
+---
+
+<BaseLayout>
+    {selectedTag && (
+      <div class="tag-filter">
+        <a href="/" class="close-button">×</a>
+        <h3>Filter by tag</h3>
+        <div class="all-tags">
+          <div class="tags">
+            {allTags.map((tag) => (
+              tag === selectedTag ? (
+                <span class="tag grunge selected-tag">{tag}</span>
+              ) : (
+                <a href={`/?tag=${encodeURIComponent(tag)}`}>
+                  <span class="tag grunge">{tag}</span>
+                </a>
+              )
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+    
+    <div class="posts">
+      {recentPosts.map((post) => (
+        <article class="post-preview">
+          <h2>
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          </h2>
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="tags">
+              {post.data.tags.map((tag) => (
+                <a href={`/?tag=${encodeURIComponent(tag)}`}>
+                  <span class="tag grunge">{tag}</span>
+                </a>
+              ))}
+            </div>
+          )}
+          <div class="date">{post.data.date}</div>
+          <div class="intro">
+            <div class="preview-content" data-has-break={post.hasPageBreak ? "true" : "false"}>
+              <post.Content />
+            </div>
+            {post.hasPageBreak && (
+              <div class="read-more">
+                <a href={`/blog/${post.slug}`} class="read-more-btn">Read more</a>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+    
+    {morePosts.length > 0 && (
+      <div class="more-posts">
+        <h2>More Posts</h2>
+        <ul>
+          {morePosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}`}>
+                {post.data.title}{" "}
+                <span class="date-small">{post.data.date}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+</BaseLayout>
+
+<style is:global>
+  /* Hide content after the page break (---) in previews */
+  .preview-content > hr ~ * {
+    display: none;
+  }
+  
+  /* Hide the HR itself in previews */
+  .preview-content > hr {
+    display: none;
+  }
+</style>
+
+<style>
+  /* =================================
+     TAG FILTER DIALOG
+     ================================= */
+  .tag-filter {
+    background: white;
+    border: 2px solid var(--night-sky);
+    box-shadow: 5px 5px 5px var(--night-sky);
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .tag-filter h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: var(--burnt-orange);
+    font-family: oswald-dark;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  
+  .tag-filter a {
+    color: var(--burnt-orange);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .tag-filter a:hover {
+    text-decoration: underline;
+  }
+  
+  .tag-filter .tag {
+    background-color: var(--night-sky);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: oswald-dark;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .tag-filter .tag.grunge,
+  .tag-filter p .tag {
+    mask-image: linear-gradient(
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.9)
+      ),
+      url("/static/img/turb.svg");
+    mask-composite: subtract;
+    mask-size: 100%;
+  }
+  
+  .tag-filter .tag.selected-tag {
+    background-color: var(--burnt-orange);
+    cursor: default;
+    opacity: 1;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transform: scale(1.1);
+    animation: tag-selected-grow 0.3s ease-out;
+  }
+  
+  @keyframes tag-selected-grow {
+    from {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+  
+  .tag-filter .tag.selected-tag:hover {
+    /* Keep selected tag scaled but no additional hover effects */
+    transform: scale(1.1);
+    box-shadow: none;
+    border-color: transparent;
+  }
+  
+  .tag-filter .tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--burnt-orange);
+  }
+  
+  .tag-filter .tag:active {
+    transform: translateY(-1px) scale(1.02);
+    transition: all 0.1s ease;
+  }
+  
+  .tag-filter p .tag:hover {
+    /* No animation for selected tag in the "Showing posts tagged with:" line */
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+  
+  .tag-filter .all-tags {
+    margin: 0.5rem 0 0 0;
+  }
+  
+  .tag-filter .tags {
+    margin-bottom: 0;
+  }
+  
+  .tag-filter .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--night-sky);
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+  }
+  
+  .tag-filter .close-button:hover {
+    background-color: var(--lightblack);
+    text-decoration: none;
+  }
+
+  /* =================================
+     POST PREVIEWS
+     ================================= */
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .post-preview {
+    box-shadow: 0 3px 2px -2px gray;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .post-preview h2 {
+    margin: 0 0 0.5rem 0;
+    color: var(--burnt-orange);
+  }
+  
+  .post-preview a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .date {
+    font-size: 0.75rem;
+    color: var(--burnt-orange);
+    margin: 0.5rem 0;
+    font-family: oswald-dark;
+  }
+  
+  .date-small {
+    font-size: 0.75rem;
+    color: var(--burnt-orange);
+  }
+  
+  .intro {
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+
+  /* =================================
+     TAG STYLES AND ANIMATIONS
+     ================================= */
+  .tags {
+    margin-top: 1rem;
+  }
+  
+  .tag {
+    background-color: var(--burnt-orange);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-family: oswald-dark;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  
+  .tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--night-sky);
+  }
+  
+  .tag.grunge {
+    mask-image: linear-gradient(
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.9)
+      ),
+      url("/static/img/turb.svg");
+    mask-composite: subtract;
+    mask-size: 100%;
+  }
+  
+  .tags a {
+    text-decoration: none;
+  }
+  
+  .more-posts {
+    margin-top: 3rem;
+  }
+  
+  .more-posts ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .more-posts li {
+    margin: 0.5rem 0;
+  }
+  
+  .more-posts a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .more-posts a:hover {
+    color: var(--burnt-orange);
+  }
+
+  /* Read more button styling */
+  .read-more {
+    margin-top: 1rem;
+  }
+  
+  .read-more-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--night-sky);
+    color: var(--wheat) !important;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-family: oswald-dark;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+  }
+  
+  .read-more-btn:hover {
+    background-color: var(--lightblack);
+    color: var(--wheat) !important;
+  }
+  
+</style>
