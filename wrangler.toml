@@ -1,11 +1,7 @@
 name = "jakebrown"
-main = "./dist/_worker.js"
-compatibility_date = "2025-05-29"
+main = "./workers/app.ts"
+compatibility_date = "2025-01-01"
 compatibility_flags = [ "nodejs_compat" ]
-
-[assets]
-directory = "./dist"
-binding = "ASSETS"
 
 [[kv_namespaces]]
 binding = "SESSION"
@@ -14,11 +10,6 @@ id = "245892257160427483f8c5ac3837c822"
 [[kv_namespaces]]
 binding = "CACHE" 
 id = "b477a170064c4c398572ab5a09dd2424"
-
-[[migrations]]
-tag = "remove"
-deleted_classes = ["DurableDatabase"]
-
 
 [observability]
 enabled = true

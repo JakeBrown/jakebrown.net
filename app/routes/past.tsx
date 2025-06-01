@@ -1,12 +1,16 @@
----
-export const prerender = true; // Static generation for past page
+import type { MetaFunction } from "react-router";
 
-import BaseLayout from '../layouts/BaseLayout.astro';
----
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Past - Jake Brown" },
+    { name: "description", content: "Jake Brown's professional background" },
+  ];
+};
 
-<BaseLayout title="Past - Jake Brown">
-    <div class="content">
-      <h1 class="grunge-heavy">Before Now</h1>
+export default function Past() {
+  return (
+    <div className="content">
+      <h1 className="grunge-heavy">Before Now</h1>
       <p>
         I've been developing software professionally for 15+ years. Here is how
         I've spent the bulk of my time.
@@ -27,7 +31,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         continued to work on Machine Learning research projects, and guest
         lectured to postgrad students on the topic of Software Architecture.
       </p>
-      <h2 class="grunge-heavy">
+      <h2 className="grunge-heavy">
         EyeSpace<sup>&reg;</sup>
       </h2>
       <p>
@@ -67,7 +71,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>{" "}
         to develop an educational web app to accompany the textbook release.
       </p>
-      <div class="images">
+      <div className="images">
         <img src="/static/img/contact-lenses-textbook.jpg" alt="textbook" />
         <img src="/static/img/textbook-app.jpg" alt="app" />
       </div>
@@ -83,63 +87,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         LLM based analysis of clinical notes.
       </p>
     </div>
-</BaseLayout>
-
-<style>
-  /* Remove header styles since they're in BaseLayout now */
-  /*
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
-  }
-  
-  nav {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  nav a:hover {
-    color: var(--burnt-orange);
-  }*/
-  
-  .content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .images {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-  
-  .images img {
-    height: 300px;
-    align-self: center;
-    box-shadow: 1px 1px 5px grey;
-    max-width: 80%;
-  }
-  
-  @media (max-width: 768px) {
-    .images {
-      flex-direction: column;
-    }
-    
-    .images img {
-      height: auto;
-      margin-top: 20px;
-    }
-  }
-  
-  ul {
-    line-height: 1.8;
-  }
-</style>
+  );
+}

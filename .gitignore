@@ -1,6 +1,6 @@
-dist/
-.astro/
-# prod
+# React Router 7 build output
+build/
+.react-router/
 dist/
 
 # dev
@@ -15,11 +15,15 @@ dist/
 
 # deps
 node_modules/
-.wrangler
+
+# Cloudflare
+.wrangler/
 
 # env
 .env
 .env.production
+.env.local
+.env.*.local
 .dev.vars
 
 # logs
@@ -33,3 +37,17 @@ lerna-debug.log*
 
 # misc
 .DS_Store
+*.local
+
+# editor
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo

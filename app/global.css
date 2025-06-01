@@ -1,0 +1,575 @@
+/* Global styles for the blog index and post styling */
+
+/* =================================
+   SEARCH BOX AND SEARCH FILTER
+   ================================= */
+.search-icon-button {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background-color: var(--night-sky);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  z-index: 100;
+  text-decoration: none;
+}
+
+.search-icon-button:hover {
+  background-color: var(--burnt-orange);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.search-icon-button:active {
+  transform: scale(0.95);
+}
+
+.filter-box {
+  background: white;
+  border: 2px solid var(--night-sky);
+  box-shadow: 5px 5px 5px var(--night-sky);
+  border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 20px;
+  position: relative;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid var(--night-sky);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+  color: var(--night-sky);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--burnt-orange);
+  box-shadow: 0 0 0 2px rgba(255, 82, 0, 0.2);
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--night-sky);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: oswald-dark;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: var(--lightblack);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.search-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.filter-box h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--burnt-orange);
+  font-family: oswald-dark;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.search-results-count {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--night-sky);
+}
+
+.filter-box .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--night-sky);
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  font-family: system-ui, sans-serif; /* Ensure consistent font */
+  -webkit-appearance: none; /* Reset button appearance */
+  appearance: none;
+  text-align: center;
+}
+
+.filter-box .close-button:hover {
+  background-color: var(--lightblack);
+  text-decoration: none;
+}
+
+/* Search result highlighting */
+mark {
+  background-color: #ffeb3b;
+  color: inherit;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* No search results message */
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--night-sky);
+}
+
+.no-results p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.no-results a {
+  color: var(--burnt-orange);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.no-results a:hover {
+  text-decoration: underline;
+}
+
+/* =================================
+   TAG STYLES
+   ================================= */
+.filter-box .tag {
+  background-color: var(--night-sky);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  font-family: oswald-dark;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.filter-box .tag.grunge,
+.filter-box p .tag {
+  mask-image: linear-gradient(
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.9)
+    ),
+    url("/static/img/turb.svg");
+  mask-composite: subtract;
+  mask-size: 100%;
+}
+
+.filter-box .tag.selected-tag {
+  background-color: var(--burnt-orange);
+  cursor: default;
+  opacity: 1;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transform: scale(1.1);
+  animation: tag-selected-grow 0.3s ease-out;
+}
+
+@keyframes tag-selected-grow {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.filter-box .tag.selected-tag:hover {
+  transform: scale(1.1);
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.filter-box .tag:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--burnt-orange);
+}
+
+.filter-box .tag:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.filter-box p .tag:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.filter-box .all-tags {
+  margin: 0.5rem 0 0 0;
+}
+
+.filter-box .tags {
+  margin-bottom: 0;
+}
+
+/* =================================
+   POST PREVIEWS
+   ================================= */
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: var(--night-sky);
+}
+
+.no-results p {
+  margin: 0.5rem 0;
+}
+
+.no-results a {
+  color: var(--burnt-orange);
+  text-decoration: none;
+}
+
+.no-results a:hover {
+  text-decoration: underline;
+}
+
+.post-preview {
+  box-shadow: 0 3px 2px -2px gray;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.post-preview h2 {
+  margin: 0 0 0.5rem 0;
+  color: var(--burnt-orange);
+}
+
+.post-preview a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--burnt-orange);
+  margin: 0.5rem 0;
+  font-family: oswald-dark;
+}
+
+.date-small {
+  font-size: 0.75rem;
+  color: var(--burnt-orange);
+}
+
+.intro {
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+/* =================================
+   TAG STYLES AND ANIMATIONS
+   ================================= */
+.tags {
+  margin-top: 1rem;
+}
+
+.tag {
+  background-color: var(--burnt-orange);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  font-family: oswald-dark;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.tag:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--night-sky);
+}
+
+.tag.grunge {
+  mask-image: linear-gradient(
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.9)
+    ),
+    url("/static/img/turb.svg");
+  mask-composite: subtract;
+  mask-size: 100%;
+}
+
+.tags a {
+  text-decoration: none;
+}
+
+.more-posts {
+  margin-top: 3rem;
+}
+
+.more-posts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.more-posts li {
+  margin: 0.5rem 0;
+}
+
+.more-posts a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.more-posts a:hover {
+  color: var(--burnt-orange);
+}
+
+/* Read more button styling */
+.read-more {
+  margin-top: 1rem;
+}
+
+.read-more-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--night-sky);
+  color: var(--wheat) !important;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-family: oswald-dark;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+
+.read-more-btn:hover {
+  background-color: var(--lightblack);
+  color: var(--wheat) !important;
+}
+
+/* Hide content after the page break in previews */
+.preview-content > hr ~ * {
+  display: none;
+}
+
+.preview-content > hr {
+  display: none;
+}
+
+/* Additional navigation styles */
+nav a:not(#homelink):not(.github-link) {
+  transition: all 300ms ease;
+}
+
+nav a:not(#homelink):not(.github-link):hover {
+  background-color: var(--lightblack);
+}
+
+/* Apply grunge effect to logo and nav items */
+#homelink img,
+nav a:not(#homelink):not(.github-link) {
+  mask-image: linear-gradient(
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/static/img/turb.svg");
+  mask-composite: subtract;
+  mask-size: 100%;
+}
+
+#homelink img {
+  align-self: center;
+}
+
+/* Content styles for individual pages */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  box-shadow: 1px 1px 5px grey;
+}
+
+.grunge-heavy {
+  font-family: oswald-dark;
+  color: var(--burnt-orange);
+}
+
+/* Now page specific styles */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content img {
+  width: 90%;
+  max-width: 600px;
+  align-self: center;
+  box-shadow: 1px 1px 5px grey;
+  margin: 1rem 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--burnt-orange);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+mark {
+  background-color: #ffeb3b;
+  padding: 2px 4px;
+}
+
+/* Past page specific styles */
+.images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.images img {
+  height: 300px;
+  align-self: center;
+  box-shadow: 1px 1px 5px grey;
+  max-width: 80%;
+}
+
+@media (max-width: 768px) {
+  .images {
+    flex-direction: column;
+  }
+  
+  .images img {
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  /* Search icon on mobile */
+  .search-icon-button {
+    top: 90px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+ul {
+  line-height: 1.8;
+}
+
+/* Blog post specific styles */
+.blog-post {
+  padding-bottom: 30px;
+  margin-top: 2rem;
+}
+
+.blog-post h1 {
+  margin-top: 0px;
+  color: var(--burnt-orange);
+}
+
+.blog-post .date {
+  font-size: 0.75rem;
+  color: var(--burnt-orange);
+  margin-top: 20px;
+  font-family: oswald-dark;
+}
+
+.blog-post ul {
+  padding-left: 0;
+}
+
+.blog-post li {
+  margin-left: 0px;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.blog-post a {
+  text-decoration: none;
+}
+
+.blog-post img {
+  max-width: 50%;
+  margin: auto;
+  display: block;
+  border: 1px solid black;
+}
+
+.blog-post .content > hr {
+  display: none;
+}

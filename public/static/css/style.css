@@ -106,13 +106,6 @@ blockquote {
   }
 }
 
-.spinner {
-  display: none;
-}
-
-.spinner.htmx-request {
-  display: inline-block;
-}
 
 h1 {
   margin-bottom: 1rem;

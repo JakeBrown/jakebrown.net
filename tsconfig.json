@@ -1,14 +1,34 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "include": [
+    "vite-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "workers/**/*.ts",
+    ".react-router/types/**/*"
+  ],
+  "exclude": [
+    "vite-plugin-demo"
+  ],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "strict": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ES2022",
+    "types": ["@cloudflare/workers-types/experimental"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./app/*"]
     }
   }
 }

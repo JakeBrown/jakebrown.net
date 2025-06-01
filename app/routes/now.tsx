@@ -1,11 +1,15 @@
----
-export const prerender = true; // Static generation for now page
+import type { MetaFunction } from "react-router";
 
-import BaseLayout from '../layouts/BaseLayout.astro';
----
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Now - Jake Brown" },
+    { name: "description", content: "What Jake Brown is doing now" },
+  ];
+};
 
-<BaseLayout title="Now - Jake Brown">
-    <div class="content">
+export default function Now() {
+  return (
+    <div className="content">
       <h1>Now</h1>
       <span><i>Updated Friday 21 March 2025</i></span>
 
@@ -39,7 +43,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </blockquote>
 
       <p>
-        You can find the source for this site on GitHub. It is built using Hono,
+        You can find the source for this site on GitHub. It is built using React Router 7,
         and deployed to Cloudflare Workers.
       </p>
       <h2>Consulting</h2>
@@ -66,56 +70,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <img src="/static/img/truck.jpeg" alt="Truck" />
     </div>
-</BaseLayout>
-
-<style>
-  /* Remove header styles since they're in BaseLayout now */
-  /*
-    padding: 1rem 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
-  }
-  
-  nav {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  nav a:hover {
-    color: var(--burnt-orange);
-  }*/
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  img {
-    width: 90%;
-    max-width: 600px;
-    align-self: center;
-    box-shadow: 1px 1px 5px grey;
-    margin: 1rem 0;
-  }
-  
-  blockquote {
-    border-left: 3px solid var(--burnt-orange);
-    padding-left: 1rem;
-    margin: 1rem 0;
-    font-style: italic;
-  }
-  
-  mark {
-    background-color: #ffeb3b;
-    padding: 2px 4px;
-  }
-</style>
+  );
+}
