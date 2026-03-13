@@ -34,8 +34,6 @@ What happens without that social effect? It's easy to skim, nod along, and stop 
 
 That means actively reading the output, not scanning it. Questioning architectural choices, not just checking if it compiles. Maintaining your own mental model of the system instead of trusting that the LLM has one. The skill ceiling here is high, and it's entirely self-imposed — no one is forcing you to concentrate except you.
 
-A junior developer reviewing Claude's output will miss things a senior developer catches immediately — the same way they'd miss things in a pull request. The difference is that in pair programming, the junior gets pulled up to the senior's level by the social dynamic. With an LLM, they can drift down to wherever their attention settles.
-
 ## The archetype that matters
 
 There's a useful framing about how senior individual contributors fork into different archetypes: the person who writes exceptional code, the deep domain expert, and the high-level tech lead who understands the whole system and coordinates the work.
