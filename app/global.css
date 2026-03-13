@@ -554,9 +554,8 @@ ul {
 }
 
 .blog-post li {
-  margin-left: 0px;
+  margin-left: 1.5em;
   text-decoration: none;
-  list-style-type: none;
 }
 
 .blog-post a {
