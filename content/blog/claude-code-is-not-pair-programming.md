@@ -17,7 +17,7 @@ That's not what's happening with Claude Code. Not even close.
 
 When I use Claude Code, there's no social pressure. No one is watching me think. I'm not tracking someone else's reasoning in real time — I'm delegating implementation and reviewing the result. I describe what I want. Claude writes it. I read what it wrote, decide if it's right, and either approve it or send it back with feedback.
 
-That's not pair programming. That's code review. That's management.
+That's not pair programming. That's code review.
 
 The skills I use most aren't the ones I'd use sitting at a whiteboard — riffing on ideas, building intuition together, staying sharp because someone's right there with me. They're the skills I built over years of reviewing pull requests and leading teams:
 
