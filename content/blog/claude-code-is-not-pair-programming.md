@@ -28,7 +28,7 @@ The skills I use most aren't the ones I'd use sitting at a whiteboard — riffin
 
 ## Why the distinction matters
 
-If you think this is pair programming, you'll try to use it like pair programming — thinking out loud, exploring the problem space together, hoping the collaboration sharpens your thinking. But there's no collaboration happening. An LLM doesn't push back on your reasoning. It doesn't make you justify your assumptions. It doesn't keep you honest the way a human sitting next to you does.
+If you think this is pair programming, you'll try to use it like pair programming — thinking out loud, exploring the problem space together, hoping the collaboration sharpens your thinking. But an LLM doesn't hijack your social circuits the way another person does. There's no one next to you whose attention you need to keep up with, no pressure to stay locked in, no risk of embarrassment if you zone out. The thing that makes pair programming work — the involuntary concentration boost of another human being right there — is completely absent.
 
 If you recognise it as code review, you'll use it much more effectively. You'll spend your time on architecture and design decisions. You'll write clear specifications. You'll read the output critically instead of assuming it's correct. You'll catch the subtle bugs that look right at first glance.
 
