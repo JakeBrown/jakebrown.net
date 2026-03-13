@@ -1,11 +1,13 @@
 ---
-title: "Claude Code Is Not Pair Programming"
+title: "It's Not Pair Programming"
 date: "2025-09-15"
 tags: ["ai", "development"]
 status: "published"
 ---
 
-Everyone keeps calling AI-assisted coding "pair programming." GitHub named their product Copilot. The mental model people reach for is two developers sitting side by side, working through a problem together — Cal Newport's description of pair programming captures it well: it's like working on a whiteboard with someone on a maths problem. Two minds actively collaborating, building on each other's ideas in real time.
+Everyone keeps calling AI-assisted coding "pair programming." GitHub named their product Copilot. The mental model people reach for is two developers sitting side by side, working through a problem together.
+
+But pair programming actually works for a specific reason. Cal Newport describes it well: it's like working on a whiteboard with someone on a maths problem. The reason it's effective isn't just "two heads are better than one." It's that the social pressure of having another person right there forces you to focus. You're locking in on understanding what you're working on because you don't want to be the one who says "wait, wait, go back — I wasn't paying attention." You track the logic more carefully. You stay engaged. The presence of another mind keeps yours sharp.
 
 That's not what's happening with Claude Code. Not even close.
 
@@ -13,11 +15,11 @@ That's not what's happening with Claude Code. Not even close.
 
 ## What's actually happening
 
-When I use Claude Code, I'm not collaborating on a problem. I'm delegating implementation and reviewing the result. I describe what I want. Claude writes it. I read what it wrote, decide if it's right, and either approve it or send it back with feedback.
+When I use Claude Code, there's no social pressure. No one is watching me think. I'm not tracking someone else's reasoning in real time — I'm delegating implementation and reviewing the result. I describe what I want. Claude writes it. I read what it wrote, decide if it's right, and either approve it or send it back with feedback.
 
 That's not pair programming. That's code review. That's management.
 
-The skills I use most aren't the ones I'd use sitting at a whiteboard — riffing on ideas, building intuition together, catching each other's mistakes in real time. They're the skills I built over years of reviewing pull requests and leading teams:
+The skills I use most aren't the ones I'd use sitting at a whiteboard — riffing on ideas, building intuition together, staying sharp because someone's right there with me. They're the skills I built over years of reviewing pull requests and leading teams:
 
 - Reading someone else's code and quickly spotting what's wrong
 - Giving clear, specific feedback that leads to a better next iteration
@@ -26,7 +28,7 @@ The skills I use most aren't the ones I'd use sitting at a whiteboard — riffin
 
 ## Why the distinction matters
 
-If you think this is pair programming, you'll try to use it like pair programming — thinking out loud, exploring the problem space together, hoping two heads are better than one. And you'll be disappointed, because LLMs don't actually think with you. They generate plausible output based on your input.
+If you think this is pair programming, you'll try to use it like pair programming — thinking out loud, exploring the problem space together, hoping the collaboration sharpens your thinking. But there's no collaboration happening. An LLM doesn't push back on your reasoning. It doesn't make you justify your assumptions. It doesn't keep you honest the way a human sitting next to you does.
 
 If you recognise it as code review, you'll use it much more effectively. You'll spend your time on architecture and design decisions. You'll write clear specifications. You'll read the output critically instead of assuming it's correct. You'll catch the subtle bugs that look right at first glance.
 
@@ -34,7 +36,7 @@ The pair programming framing also leads people to undervalue the human side. "An
 
 ## The archetype that matters
 
-There's a useful framing from Cal Newport about how senior individual contributors fork into different archetypes: the person who writes exceptional code, the deep domain expert, and the high-level tech lead who understands the whole system and coordinates the work.
+There's a useful framing about how senior individual contributors fork into different archetypes: the person who writes exceptional code, the deep domain expert, and the high-level tech lead who understands the whole system and coordinates the work.
 
 AI-assisted coding rewards the third archetype disproportionately. You don't need to write exceptional code anymore — Claude does that. You don't necessarily need deep domain expertise — Claude has read the docs. But you absolutely need to understand how the system works end to end, give clear direction, and review the output critically.
 
