@@ -28,11 +28,13 @@ The skills I use most aren't the ones I'd use sitting at a whiteboard — riffin
 
 ## Why the distinction matters
 
-If you think this is pair programming, you'll try to use it like pair programming — thinking out loud, exploring the problem space together, hoping the collaboration sharpens your thinking. But an LLM doesn't hijack your social circuits the way another person does. There's no one next to you whose attention you need to keep up with, no pressure to stay locked in, no risk of embarrassment if you zone out. The thing that makes pair programming work — the involuntary concentration boost of another human being right there — is completely absent.
+Pair programming makes you smarter. That's the whole point. An LLM doesn't hijack your social circuits the way another person does. There's no one next to you whose attention you need to keep up with, no pressure to stay locked in, no risk of embarrassment if you zone out. The thing that makes pair programming work — the involuntary concentration boost of another human being right there — is completely absent.
 
-If you recognise it as code review, you'll use it much more effectively. You'll spend your time on architecture and design decisions. You'll write clear specifications. You'll read the output critically instead of assuming it's correct. You'll catch the subtle bugs that look right at first glance.
+Claude Code has the opposite risk. It can make you dumber. When someone else is writing all the code and you're just approving it, it's easy to skim, nod along, and stop really thinking. The feedback loop that keeps you sharp in pair programming — the social pressure to track every line of reasoning — doesn't exist. You have to supply that discipline yourself.
 
-The pair programming framing also leads people to undervalue the human side. "Anyone can pair program with an AI" implies the skill ceiling is low. But code review and technical direction have a very high skill ceiling. A junior developer reviewing Claude's output will miss things a senior developer catches immediately — the same way they'd miss things in a pull request.
+That means actively reading the output, not scanning it. Questioning architectural choices, not just checking if it compiles. Maintaining your own mental model of the system instead of trusting that the LLM has one. The skill ceiling here is high, and it's entirely self-imposed — no one is forcing you to concentrate except you.
+
+A junior developer reviewing Claude's output will miss things a senior developer catches immediately — the same way they'd miss things in a pull request. The difference is that in pair programming, the junior gets pulled up to the senior's level by the social dynamic. With an LLM, they can drift down to wherever their attention settles.
 
 ## The archetype that matters
 
