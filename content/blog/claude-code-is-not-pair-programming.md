@@ -38,5 +38,5 @@ That means actively reading the output, not scanning it. Questioning architectur
 
 There's a useful framing about how senior individual contributors fork into different archetypes: the person who writes exceptional code, the deep domain expert, and the high-level tech lead who understands the whole system and coordinates the work.
 
-AI-assisted coding rewards the third archetype disproportionately. You don't need to write exceptional code anymore — Claude does that. You don't necessarily need deep domain expertise — Claude has read the docs. But do you still need to understand how the system works end to end, give clear direction, and review the output critically?
+AI-assisted coding rewards the third archetype disproportionately. You don't need to write exceptional code anymore — Claude does that. You don't necessarily need deep domain expertise — Claude has read the docs. What's left is the hard part: understanding how the whole system fits together, giving clear direction, catching the mistakes that look right at first glance. Pair programming gave you a cognitive boost to do all of that. Can you still do it when nothing is keeping you focused but yourself?
 
