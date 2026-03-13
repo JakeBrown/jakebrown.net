@@ -30,7 +30,7 @@ The skills I use most aren't the ones I'd use sitting at a whiteboard — riffin
 
 Pair programming makes you smarter. That's the whole point. An LLM doesn't hijack your social circuits the way another person does. There's no one next to you whose attention you need to keep up with, no pressure to stay locked in, no risk of embarrassment if you zone out. The thing that makes pair programming work — the involuntary concentration boost of another human being right there — is completely absent.
 
-Claude Code has the opposite risk. It can make you dumber. When someone else is writing all the code and you're just approving it, it's easy to skim, nod along, and stop really thinking. The feedback loop that keeps you sharp in pair programming — the social pressure to track every line of reasoning — doesn't exist. You have to supply that discipline yourself.
+What happens without that social effect? It's easy to skim, nod along, and stop really thinking. When someone else is writing all the code and you're just approving it, you can drift. The feedback loop that keeps you sharp in pair programming — the social pressure to track every line of reasoning — doesn't exist. You have to supply that discipline yourself.
 
 That means actively reading the output, not scanning it. Questioning architectural choices, not just checking if it compiles. Maintaining your own mental model of the system instead of trusting that the LLM has one. The skill ceiling here is high, and it's entirely self-imposed — no one is forcing you to concentrate except you.
 
