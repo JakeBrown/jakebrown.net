@@ -34,7 +34,7 @@ What happens without that social effect? It's easy to skim, nod along, and stop 
 
 That means actively reading the output, not scanning it. Questioning architectural choices, not just checking if it compiles. Maintaining your own mental model of the system instead of trusting that the LLM has one. The skill ceiling here is high, and it's entirely self-imposed — no one is forcing you to concentrate except you.
 
-## The archetype that matters
+## What are you actually doing?
 
 There's a useful framing about how senior individual contributors fork into different archetypes: the person who writes exceptional code, the deep domain expert, and the high-level tech lead who understands the whole system and coordinates the work.
 
