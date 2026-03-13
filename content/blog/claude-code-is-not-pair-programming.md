@@ -40,4 +40,3 @@ There's a useful framing about how senior individual contributors fork into diff
 
 AI-assisted coding rewards the third archetype disproportionately. You don't need to write exceptional code anymore — Claude does that. You don't necessarily need deep domain expertise — Claude has read the docs. But do you need to understand how the system works end to end, give clear direction, and review the output critically.
 
-That's not pair programming. That's leadership. And it's a skill set that gets more valuable, not less, as the tools get better.
