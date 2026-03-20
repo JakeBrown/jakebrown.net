@@ -19,8 +19,9 @@ export default function Now() {
       </p>
 
       <p>
-        Building <a href="https://forktree.app">Forktree</a> — a platform for
-        music teachers to run their studios online.
+        Building <a href="https://forktree.app">Forktree</a> — an experiential
+        environmental education platform for{" "}
+        <a href="https://www.theforktreeproject.com">The Forktree Project</a>.
       </p>
     </div>
   );
