@@ -5,7 +5,9 @@ tags: ["ai", "development"]
 status: "published"
 ---
 
-Everyone keeps calling AI-assisted coding "pair programming." GitHub named their product Copilot. The mental model people reach for is two developers sitting side by side, working through a problem together.
+Everyone keeps calling AI-assisted coding "pair programming." When GitHub launched Copilot, CEO Nat Friedman introduced it as ["your AI pair programmer."](https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/) Their blog describes it as ["an AI pair programmer that seems capable of reading your mind."](https://github.blog/ai-and-ml/github-copilot/responsible-ai-pair-programming-with-github-copilot/) When Amazon launched CodeWhisperer, TechCrunch called it ["a GitHub Copilot-like AI pair programming tool."](https://techcrunch.com/2022/06/23/amazon-launches-codewhisperer-its-ai-pair-programming-tool/) LinkedIn Learning has [an entire course](https://www.linkedin.com/learning/ai-pair-programming-with-github-copilot-25302433) called "AI Pair Programming with GitHub Copilot." It's the industry's default metaphor.
+
+But pair programming actually works for a specific reason, and it has nothing to do with what these tools do.
 
 But pair programming actually works for a specific reason. Cal Newport describes it well: it's like working on a whiteboard with someone on a maths problem. The reason it's effective isn't just "two heads are better than one." It's that the social pressure of having another person right there forces you to focus. You're locking in on understanding what you're working on because you don't want to be the one who says "wait, wait, go back — I wasn't paying attention." You track the logic more carefully. You stay engaged. The presence of another mind keeps yours sharp.
 
