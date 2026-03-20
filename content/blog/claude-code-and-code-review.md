@@ -1,5 +1,5 @@
 ---
-title: "Claude Code and the Art of Code Review"
+title: "The Tech Lead's Advantage in AI Coding"
 date: "2025-07-15"
 tags: ["ai", "development"]
 status: "published"
