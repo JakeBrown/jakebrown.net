@@ -17,6 +17,11 @@ export default function Now() {
         Living in Prahran, Melbourne. Consulting with{" "}
         <a href="https://windybit.co">Windy Bit</a>.
       </p>
+
+      <p>
+        Building <a href="https://forktree.app">Forktree</a> — a platform for
+        music teachers to run their studios online.
+      </p>
     </div>
   );
 }
